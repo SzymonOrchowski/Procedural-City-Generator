@@ -1,0 +1,107 @@
+body {
+    background-color: black;
+    margin: 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: white
+}
+
+h3 {
+    font-size: 0.8em;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+a {
+    color:rgba(200, 0, 200, 1)
+}
+
+#sliderForm {
+    background-color: rgba(100, 0, 100, 0.5);
+    border-radius: 20px;
+    width: 300px;
+    padding: 20px;
+    left: calc(100% - 340px);
+    text-align: center;
+    color: white;
+    position: absolute;
+}
+
+#submit-button {
+    margin-top: 5px;
+}
+
+#slider {
+    width: 80%;
+}
+
+#description {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 90%;  
+    overflow: hidden;  
+}
+
+#examples {
+    display:flex;
+    justify-content:space-evenly
+}
+
+.example {
+    width: 150px;
+    height: 135px;
+    background-color: rgba(100, 0, 100, 0.5);
+
+}
+
+.example1 {
+    padding-right: 10px;
+    padding-top: 7px;
+    width: 120px;
+    height: 110px;
+    background-color: rgba(100, 0, 100, 0.5);
+}
+
+.row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.row div {
+    width: 20px;
+    text-align: right;
+}
+
+#examples-title {
+    font-weight: 800;
+    text-align: center;
+    margin-right: 5px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+#header {
+    text-align: center;
+}
+
+#footer {
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+#github {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#github img {
+    margin-left: 20px;
+    opacity: 0.4;
+}
+
+#github img:hover {
+    opacity: 0.9;
+}
