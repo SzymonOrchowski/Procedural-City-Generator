@@ -80,148 +80,146 @@ function runCreationScript(objects) {
         scene.add( mesh );
     }
 
-    const building1x1Geometry = objects.building1x1Object.children[0].geometry
-
     const createBuilding1x1A = (position) => {
-        const geometry = new THREE.BoxGeometry( 1, 0.1, 1 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xDDDD00 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 1, 0.1, 1 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xDDDD00 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building1x1A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0]
         mesh.position.z = position[2]
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
         scene.add( mesh );
-        // const object = building1x1Object.clone();
-        // object.scale.set(.01, .01, .01)
-        // object.position.x = position[0]
-        // object.position.z = position[2]
-        // object.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
-        // scene.add(object)
     }
 
     const createBuilding1x1B = (position) => {
-        const geometry = new THREE.BoxGeometry( 1, 0.1, 1 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xAAAA00 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 1, 0.1, 1 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xDDDD00 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building1x1B_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0]
         mesh.position.z = position[2]
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
         scene.add( mesh );
-        // const object = building1x1Object.clone();
-        // object.scale.set(.01, .01, .01)
-        // object.position.x = position[0]
-        // object.position.z = position[2]
-        // object.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
-        // scene.add(object)
     }
 
     const createBuilding1x1C = (position) => {
-        const geometry = new THREE.BoxGeometry( 1, 0.1, 1 );
-        const material = new THREE.MeshLambertMaterial( { color: 0x888800 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 1, 0.1, 1 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xDDDD00 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building1x1C_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0]
         mesh.position.z = position[2]
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
         scene.add( mesh );
-        // const object = building1x1Object.clone();
-        // object.scale.set(.01, .01, .01)
-        // object.position.x = position[0]
-        // object.position.z = position[2]
-        // object.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
-        // scene.add(object)
     }
 
     const createBuilding2x1 = (position) => {
-        const geometry = new THREE.BoxGeometry( 2, 0.1, 1 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xDD0000 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 2, 0.1, 1 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xDD0000 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building2x1A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 0.5
         mesh.position.z = position[2] 
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 2) * 180)
         scene.add( mesh );
     }
 
     const createBuilding2x2 = (position) => {
-        const geometry = new THREE.BoxGeometry( 2, 0.1, 2 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xDD00DD } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 2, 0.1, 2 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xDD00DD } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building2x2A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 0.5
         mesh.position.z = position[2] + 0.5
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
         scene.add( mesh );
-        // const object = building2x2Object.clone();
-        // object.scale.set(.01, .01, .01)
-        // object.position.x = position[0] + 0.5
-        // object.position.z = position[2] + 0.5
-        // object.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
-        // scene.add(object)
     }
 
     const createBuilding3x2 = (position) => {
-        const geometry = new THREE.BoxGeometry( 3, 0.1, 2 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xAA0000 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 3, 0.1, 2 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xAA0000 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building3x2A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 1
         mesh.position.z = position[2] + 0.5
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 2) * 180)
         scene.add( mesh );
     }
 
     const createBuilding2x3 = (position) => {
-        const geometry = new THREE.BoxGeometry( 2, 0.1, 3 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xAA88DD } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 2, 0.1, 3 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xAA88DD } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building3x2A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 0.5
         mesh.position.z = position[2] + 1
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * ((Math.floor(Math.random() * 2) * 180) + 90)
         scene.add( mesh );
     }
 
     const createBuilding4x4 = (position) => {
-        const geometry = new THREE.BoxGeometry( 4, 0.1, 4 );
-        const material = new THREE.MeshLambertMaterial( { color: 0x0000FF } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 4, 0.1, 4 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0x0000FF } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building4x4A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 1.5
         mesh.position.z = position[2] + 1.5
-        mesh.receiveShadow = true;
         scene.add( mesh );
     }
 
     const createBuilding5x3 = (position) => {
-        const geometry = new THREE.BoxGeometry( 5, 0.1, 3 );
-        const material = new THREE.MeshLambertMaterial( { color: 0x88FF88 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 5, 0.1, 3 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0x88FF88 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building5x3A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 2
         mesh.position.z = position[2] + 1
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 2) * 180)
         scene.add( mesh );
     }
 
     const createBuilding3x5 = (position) => {
-        const geometry = new THREE.BoxGeometry( 3, 0.1, 5 );
-        const material = new THREE.MeshLambertMaterial( { color: 0x55BB55 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 3, 0.1, 5 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0x55BB55 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building5x3A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 1
         mesh.position.z = position[2] + 2
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * ((Math.floor(Math.random() * 2) * 180) + 90)
         scene.add( mesh );
     }
 
     const createBuilding6x2 = (position) => {
-        const geometry = new THREE.BoxGeometry( 6, 0.1, 2 );
-        const material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 6, 0.1, 2 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building6x2A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 2.5
         mesh.position.z = position[2] + 0.5
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 2) * 180)
         scene.add( mesh );
     }
 
     const createBuilding2x6 = (position) => {
-        const geometry = new THREE.BoxGeometry( 2, 0.1, 6 );
-        const material = new THREE.MeshLambertMaterial( { color: 0x999999 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        // const geometry = new THREE.BoxGeometry( 2, 0.1, 6 );
+        // const material = new THREE.MeshLambertMaterial( { color: 0x999999 } );
+        // const mesh = new THREE.Mesh( geometry, material );
+        const mesh = building6x2A_obj.clone();
+        mesh.scale.set(.01, .01, .01)
         mesh.position.x = position[0] + 0.5
         mesh.position.z = position[2] + 2.5
-        mesh.receiveShadow = true;
+        mesh.rotation.y = Math.PI/180 * ((Math.floor(Math.random() * 2) * 180) + 90)
         scene.add( mesh );
     }
 
@@ -719,10 +717,10 @@ function runCreationScript(objects) {
 
             if (element.terrainType === 'building' && !element.used) 
             {
-                const variant = Math.floor(Math.random() * 2.99)
-                if (variant === 0) createBuilding1x1A([element.positionX,1,element.positionZ])
-                if (variant === 1) createBuilding1x1B([element.positionX,1,element.positionZ])
-                if (variant === 2) createBuilding1x1C([element.positionX,1,element.positionZ])
+                const variant = Math.floor(Math.random() * 29.9)
+                if (variant < 15) createBuilding1x1A([element.positionX,1,element.positionZ])
+                if (variant === 15) createBuilding1x1B([element.positionX,1,element.positionZ])
+                if (variant > 15) createBuilding1x1C([element.positionX,1,element.positionZ])
             }
 
         })
@@ -824,8 +822,18 @@ function runCreationScript(objects) {
 }
 
 const manager = new THREE.LoadingManager(); 
-let building1x1Object;
-let building2x2Object;
+
+// List of object to load
+
+let building1x1A_obj;
+let building1x1B_obj;
+let building1x1C_obj;
+let building2x1A_obj;
+let building2x2A_obj;
+let building3x2A_obj;
+let building4x4A_obj;
+let building5x3A_obj;
+let building6x2A_obj;
 
 manager.onStart = function ( url, itemsLoaded, itemsTotal ) 
 { 
@@ -836,8 +844,15 @@ manager.onLoad = function ( )
     console.log( 'Loading complete!'); 
     runCreationScript(
         {
-            building1x1Object,
-            building2x2Object
+            building1x1A_obj,
+            building1x1B_obj,
+            building1x1C_obj,
+            building2x1A_obj,
+            building2x2A_obj,
+            building3x2A_obj,
+            building4x4A_obj,
+            building5x3A_obj,
+            building6x2A_obj,
         }
     );
 }; 
@@ -849,14 +864,44 @@ manager.onError = function ( url )
 { 
     console.log( 'There was an error loading ' + url ); 
 }; 
+
+/// Objects load to load manager
+
 const loader = new FBXLoader( manager ); 
 
-loader.load('./objects/1x1.fbx', function ( object ) { 
-    building1x1Object = object
+loader.load('./objects/1x1A.fbx', function ( object ) { 
+    building1x1A_obj = object
  } );
-
-loader.load('./objects/2x2.fbx', function ( object ) { 
-    building2x2Object = object
+loader.load('./objects/1x1B.fbx', function ( object ) { 
+    building1x1B_obj = object
 } );
+loader.load('./objects/1x1C.fbx', function ( object ) { 
+    building1x1C_obj = object
+} );
+
+loader.load('./objects/2x1A.fbx', function ( object ) { 
+    building2x1A_obj = object
+ } );
+loader.load('./objects/2x2A.fbx', function ( object ) { 
+    building2x2A_obj = object
+} );
+
+loader.load('./objects/3x2A.fbx', function ( object ) { 
+    building3x2A_obj = object
+} );
+
+loader.load('./objects/4x4A.fbx', function ( object ) { 
+    building4x4A_obj = object
+} );
+
+loader.load('./objects/5x3A.fbx', function ( object ) { 
+    building5x3A_obj = object
+} );
+
+loader.load('./objects/6x2A.fbx', function ( object ) { 
+    building6x2A_obj = object
+} );
+
+///
 
 

@@ -16,7 +16,6 @@ export const generateMap = (sideLength) => {
     const buildingTerraingRandomGenerator = () => {
         const x = Math.floor(Math.random() * 5.9 + 1)
         const z = Math.floor(Math.random() * 5.9 + 1)
-        console.log(x,z)
         return [x, z]
     }
 
