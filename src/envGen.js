@@ -1,11 +1,15 @@
 export const generateMap = (sideLength) => {
     const terrains = ['street', 'building']
-    // array = [x, y, ]
     const array = []
     for (let i = 0; i < sideLength; i++) {
         const row = []
         for (let j = 0; j < sideLength; j++) {
-            array.push([i,j,undefined, undefined])
+            array.push({
+                positionX: i,
+                positionZ: j,
+                terrainType: undefined,
+                used: false
+            })
         }
     }
 
@@ -42,45 +46,46 @@ export const generateMap = (sideLength) => {
     array.forEach(square => {
         // counter++
         // console.log('counter = ', counter, square)
-        if (!square[2] && counter <= 30) {
+        if (!square.terrainType && counter <= 30) {
             const area = buildingTerraingRandomGenerator()
             const color = colorGenerator()
             const hight = Math.floor(Math.random() * 10) + 1
             // const hight = 1
             array.map((element) => {
-                if (element[0] >= square[0] &&
-                    element[0] < square[0] + area[0] && 
-                    element[1] >= square[1] &&
-                    element[1] < square[1] + area[1]
+                if (element.positionX >= square.positionX &&
+                    element.positionX < square.positionX + area[0] && 
+                    element.positionZ >= square.positionZ &&
+                    element.positionZ < square.positionZ + area[1]
                     ) {
-                    if(!element[2]) {
-                        element[2] = 'building'
-                        element[3] = color
-                        element[4] = hight
+                    if(!element.terrainType) {
+                        element.terrainType = 'building'
+                        // element.color = color
+                        // element[4] = hight
                     }
                 } 
-                if (element[0] === square[0] + area[0] && 
-                    element[1] >= square[1] && 
-                    element[1] < square[1] + area[1] 
+                if (element.positionX === square.positionX + area[0] && 
+                    element.positionZ >= square.positionZ && 
+                    element.positionZ < square.positionZ + area[1] 
                     || 
-                    element[1] === square[1] + area[1] && 
-                    element[0] >= square[0] && 
-                    element[0] < square[0] + area[0] + 1
+                    element.positionZ === square.positionZ + area[1] && 
+                    element.positionX >= square.positionX && 
+                    element.positionX < square.positionX + area[0] + 1
                     ||
-                    element[0] === square[0] - 1 && 
-                    element[1] >= square[1] && 
-                    element[1] < square[1] + area[1]
+                    element.positionX === square.positionX - 1 && 
+                    element.positionZ >= square.positionZ && 
+                    element.positionZ < square.positionZ + area[1]
                     ||
-                    element[1] === square[1] - 1 && 
-                    element[0] >= square[0] && 
-                    element[0] < square[0] + area[0] + 1
+                    element.positionZ === square.positionZ - 1 && 
+                    element.positionX >= square.positionX && 
+                    element.positionX < square.positionX + area[0] + 1
                     ) {
-                    if (!element[2]) {
-                        element[2] = 'street'
+                    if (!element.terrainType) {
+                        element.terrainType = 'street'
                     }
                 }
             })
         }
     })
+    // console.log(array)
     return array;
 }
