@@ -32,10 +32,10 @@ function runCreationScript(objects) {
 
     // Scene & FOG
     const scene = new THREE.Scene()
-    // const fogColor = new THREE.Color(0xaaaaaa)
+    const fogColor = new THREE.Color(0xaaaaaa)
 
-    // scene.background = fogColor
-    // scene.fog = new THREE.Fog(fogColor, 0.000025, 20)
+    scene.background = fogColor
+    scene.fog = new THREE.Fog(fogColor, 0.000025, 20)
 
     // Lights
 
@@ -66,6 +66,7 @@ function runCreationScript(objects) {
     // Controls
 
     const controls = new OrbitControls( camera, renderer.domElement );
+    controls.enableZoom = false;
 
     // Scenery Objects
 
@@ -256,27 +257,27 @@ function runCreationScript(objects) {
                     {
                             if (
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ ).used &&
+                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ ).used &&
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ + 1).terrainType === 'building' && 
-                                !array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ + 1).used
+                               !array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ + 1).used
                                 ) 
                             {
                                 if (probability > 0.7) {
@@ -532,35 +533,35 @@ function runCreationScript(objects) {
                     {
                             if (
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used &&
+                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used &&
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).used &&
+                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).used &&
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used &&
+                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used &&
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).used &&
+                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).used &&
                                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used &&
+                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used &&
                                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).used &&
+                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).used &&
                                 array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
+                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
                                 array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
+                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
                                 array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used &&
+                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used &&
                                 array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used
+                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used
                                 ) 
                             {
                                 if (probability > 0.6) {
@@ -704,7 +705,7 @@ function runCreationScript(objects) {
                         !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used
                         ) 
                     {
-                        if (probability > 0.6) {
+                        if (probability > 0.8) {
                             createBuilding2x1([element.positionX,1,element.positionZ])
                             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
@@ -724,8 +725,8 @@ function runCreationScript(objects) {
             }
 
         })
-        controls.target.set(sideElements / 2, 0, sideElements / 2)
-        camera.position.set(sideElements / 2, sideElements * 1.5, -3)
+        // controls.target.set(sideElements / 2, 0, sideElements / 2)
+        // camera.position.set(sideElements / 2, sideElements * 1.5, -3)
     }
 
     createMap(50);
@@ -762,38 +763,86 @@ function runCreationScript(objects) {
 
     // Player
 
-    const playerGeometry = new THREE.SphereBufferGeometry(0.16, 10, 10)
-    const playerMaterial = new THREE.MeshLambertMaterial({color: 'red'})
-    const player = new THREE.Mesh(playerGeometry, playerMaterial)
-    player.position.y = 0.25
-    // scene.add(player)
+    const player = car.clone()
+    player.scale.set(.0025,.0025,.0025)
+    player.position.y = 0.1
+    scene.add(player)
+
     // console.log(Object.keys(scene.children))
     // console.log(scene.children[4])
 
     // Camera Player Group
 
-    // const thirdPersonCamera = new Group()
-    // thirdPersonCamera.add(player)
-    // thirdPersonCamera.add(camera)
-    // camera.position.set(player.position.x, 0.8, player.position.z + 1)
-    // thirdPersonCamera.position.x = playerPositionStart[0]
-    // thirdPersonCamera.position.z = playerPositionStart[1]
-    // scene.add(thirdPersonCamera)
+    const thirdPersonCamera = new Group()
+    thirdPersonCamera.add(player)
+    thirdPersonCamera.add(camera)
+    camera.position.set(player.position.x, 0.8, player.position.z + 1)
+    thirdPersonCamera.position.x = playerPositionStart[0]
+    thirdPersonCamera.position.z = playerPositionStart[1]
+    scene.add(thirdPersonCamera)
 
     // Speed
 
     let currentSpeed = 0
+    let wheelRotationRatio = 0
 
     // Animations
 
     function animate() {
-        
-
         requestAnimationFrame( animate );
+        
         // player movement
-        if (input.keys.includes("a")) thirdPersonCamera.rotation.y += 0.04
-        if (input.keys.includes("d")) thirdPersonCamera.rotation.y -= 0.04
 
+        if (wheelRotationRatio > 0) wheelRotationRatio -= 1
+        if (wheelRotationRatio < 0) wheelRotationRatio += 1
+
+        if (input.keys.includes("a")) 
+        {
+            if (wheelRotationRatio > -10) wheelRotationRatio -= 2
+            if (currentSpeed > 0) {
+                thirdPersonCamera.rotation.y += 0.04
+            } 
+            if (currentSpeed < 0) {
+                thirdPersonCamera.rotation.y -= 0.04
+            } 
+            player.children[0].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            player.children[1].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            player.children[2].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            player.children[4].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+
+        } else {
+            if (wheelRotationRatio < 0 && wheelRotationRatio > -10) {
+                player.children[0].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                player.children[1].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                player.children[2].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                player.children[4].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            }
+        }
+
+        if (input.keys.includes("d")) 
+        {
+            if (wheelRotationRatio < 10) wheelRotationRatio += 2
+            if (currentSpeed > 0) {
+                thirdPersonCamera.rotation.y -= 0.04
+            }
+            if (currentSpeed < 0) {
+                thirdPersonCamera.rotation.y += 0.04
+            }
+            player.children[0].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            player.children[1].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            player.children[2].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            player.children[4].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+        } else {
+            if (wheelRotationRatio > 0 && wheelRotationRatio < 10) {
+
+                player.children[0].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                player.children[1].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                player.children[2].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                player.children[4].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+
+            }
+        }
+     
         if (input.keys.includes("w")) {
             if (currentSpeed < 100) currentSpeed += 1
             thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
@@ -806,11 +855,18 @@ function runCreationScript(objects) {
             }
         }
         if (input.keys.includes("s")) {
-            thirdPersonCamera.position.x += 0.06 * Math.sin(thirdPersonCamera.rotation.y)
-            thirdPersonCamera.position.z += 0.06 * Math.cos(thirdPersonCamera.rotation.y)
+            if (currentSpeed > -100) currentSpeed -= 1
+            thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
+            thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
+        } else {
+            if (currentSpeed < 0) {
+                currentSpeed += 1
+                thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
+                thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
+            }
         }
 
-        // controls.target.set(thirdPersonCamera.position.x, thirdPersonCamera.position.y + 0.6, thirdPersonCamera.position.z)
+        controls.target.set(thirdPersonCamera.position.x, thirdPersonCamera.position.y + 0.6, thirdPersonCamera.position.z)
         controls.update();
 
         renderer.render( scene, camera );
@@ -825,6 +881,7 @@ const manager = new THREE.LoadingManager();
 
 // List of object to load
 
+let car;
 let building1x1A_obj;
 let building1x1B_obj;
 let building1x1C_obj;
@@ -844,6 +901,7 @@ manager.onLoad = function ( )
     console.log( 'Loading complete!'); 
     runCreationScript(
         {
+            car,
             building1x1A_obj,
             building1x1B_obj,
             building1x1C_obj,
@@ -865,9 +923,17 @@ manager.onError = function ( url )
     console.log( 'There was an error loading ' + url ); 
 }; 
 
-/// Objects load to load manager
+// Object Loader
 
 const loader = new FBXLoader( manager ); 
+
+/// Player object load to load manager
+
+loader.load('./objects/car.fbx', function ( object ) { 
+    car = object
+ } );
+
+/// Building bbjects load to load manager
 
 loader.load('./objects/1x1A.fbx', function ( object ) { 
     building1x1A_obj = object
