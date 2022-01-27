@@ -4,6 +4,7 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { generateMap } from './envGen'
 import { Group } from 'three'
+import CANNON from 'cannon'
 
 //Function
 
@@ -37,23 +38,31 @@ function runCreationScript(objects) {
     scene.background = fogColor
     scene.fog = new THREE.Fog(fogColor, 0.000025, 20)
 
+    const axesHelper = new THREE.AxesHelper(1)
+
+    scene.add(axesHelper)
+
     // Lights
 
-    const pointLight1 = new THREE.PointLight(0xffffff, 1, 0)
+    const pointLight1 = new THREE.PointLight(0xffaa55, 1, 0)
     scene.add(pointLight1)
-    pointLight1.position.z = 3
+    pointLight1.position.y = 10
+    pointLight1.position.z = 50
+    pointLight1.position.x = 50
 
-    const pointLight2 = new THREE.PointLight(0xffffff, 0.6, 0)
-    scene.add(pointLight2)
-    pointLight2.position.z = 2
-    pointLight2.position.y = -2
+    // const pointLight2 = new THREE.PointLight(0xffffff, 0.6, 0)
+    // scene.add(pointLight2)
+    // pointLight2.position.z = 2
+    // pointLight2.position.y = -2
+    // pointLight2.position.z = 200
+    // pointLight2.position.y = 200
 
-    const pointLight3 = new THREE.PointLight(0xff0000, 0.5, 0)
+    const pointLight3 = new THREE.PointLight(0xff3333, 0.7, 0)
+    pointLight3.position.y = 10
     scene.add(pointLight3)
-    pointLight2.position.z = 200
-    pointLight2.position.y = 200
+
         
-    const light = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.6 ); 
+    const light = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.1 ); 
     scene.add( light );
 
     // Camera
@@ -227,12 +236,14 @@ function runCreationScript(objects) {
     
 
     const playerPositionStart = [0, 0]
+    const movementConstraintsArray = []
 
     const createMap = (sideElements) => {
         const array = generateMap(sideElements);
         array.forEach(element => {
             if (element.terrainType === 'street') {
                 createStreet([element.positionX,1,element.positionZ])
+                movementConstraintsArray.push([element.positionX, element.positionZ])
                 playerPositionStart[0] = element.positionX,
                 playerPositionStart[1] = element.positionZ
             }
@@ -737,22 +748,28 @@ function runCreationScript(objects) {
         constructor(){
             this.keys = []
             window.addEventListener('keydown', (e) => {
-                if ((e.key === "a" || 
-                     e.key === "s" ||
-                     e.key === "d" ||
-                     e.key === "w" ||
-                     e.key === "k" ||
-                     e.key === "l") && this.keys.indexOf(e.key) === -1) {
+                if ((e.key === "a" || e.key === "d") && this.keys.indexOf(e.key) === -1) 
+                {
                     this.keys.push(e.key)
+                }
+
+                if (e.key === "w" && this.keys.indexOf(e.key) === -1) 
+                {
+                this.keys.push(e.key)
+                if (this.keys.indexOf("s") !== -1) this.keys.splice(this.keys.indexOf("s"), 1)
+                }
+
+                if (e.key === "s" && this.keys.indexOf(e.key) === -1) 
+                {
+                this.keys.push(e.key)
+                if (this.keys.indexOf("w") !== -1) this.keys.splice(this.keys.indexOf("w"), 1)
                 }
             })
             window.addEventListener('keyup', (e) => {
                 if (e.key === "a" || 
                     e.key === "s" ||
                     e.key === "d" ||
-                    e.key === "w" ||
-                    e.key === "k" ||
-                    e.key === "l") {
+                    e.key === "w" ) {
                     this.keys.splice(this.keys.indexOf(e.key), 1)
                     }
             })
@@ -781,25 +798,44 @@ function runCreationScript(objects) {
     thirdPersonCamera.position.z = playerPositionStart[1]
     scene.add(thirdPersonCamera)
 
+    // Camera movement smoothe
+
+    let cameraSmooth = 1
+
     // Speed
 
     let currentSpeed = 0
     let wheelRotationRatio = 0
+    let cameraOffAxisRatio = 0
 
     // Animations
 
     function animate() {
+
         requestAnimationFrame( animate );
-        
+        // console.log([thirdPersonCamera.position.x.toFixed(1), thirdPersonCamera.position.z.toFixed(1), currentSpeed])
+        console.log(Math.floor(thirdPersonCamera.position.x + 0.5), thirdPersonCamera.position.x.toFixed(2))
+        console.log(Math.floor(thirdPersonCamera.position.z + 0.5), thirdPersonCamera.position.z.toFixed(2))
+        console.log(movementConstraintsArray.find(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5)))
+
         // player movement
 
         if (wheelRotationRatio > 0) wheelRotationRatio -= 1
         if (wheelRotationRatio < 0) wheelRotationRatio += 1
+        if (cameraOffAxisRatio > 0) cameraOffAxisRatio -= 1
+        if (cameraOffAxisRatio < 0) cameraOffAxisRatio += 1
+
+        camera.position.x = player.position.x + (-0.3 * (cameraOffAxisRatio / 50))
+
+        if (currentSpeed > 0) currentSpeed -= 1
+        if (currentSpeed < 0) currentSpeed += 1
+
 
         if (input.keys.includes("a")) 
         {
             if (wheelRotationRatio > -10) wheelRotationRatio -= 2
             if (currentSpeed > 0) {
+                if (cameraOffAxisRatio < 50) cameraOffAxisRatio += 2
                 thirdPersonCamera.rotation.y += 0.04
             } 
             if (currentSpeed < 0) {
@@ -820,9 +856,10 @@ function runCreationScript(objects) {
         }
 
         if (input.keys.includes("d")) 
-        {
+        { 
             if (wheelRotationRatio < 10) wheelRotationRatio += 2
             if (currentSpeed > 0) {
+                if (cameraOffAxisRatio > -50) cameraOffAxisRatio -= 2
                 thirdPersonCamera.rotation.y -= 0.04
             }
             if (currentSpeed < 0) {
@@ -839,30 +876,80 @@ function runCreationScript(objects) {
                 player.children[1].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
                 player.children[2].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
                 player.children[4].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            }
+        }
 
-            }
-        }
-     
+        // console.log(Math.floor((thirdPersonCamera.rotation.y / Math.PI) * 4) * Math.PI)
+
         if (input.keys.includes("w")) {
-            if (currentSpeed < 100) currentSpeed += 1
-            thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
-            thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
-        } else {
-            if (currentSpeed > 0) {
-                currentSpeed -= 1
-                thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
-                thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
+            
+            if (
+                movementConstraintsArray.some(streetElement => 
+                    (
+                        (streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) || streetElement[0] === (thirdPersonCamera.position.x + 0.5) - 1) && 
+                        (streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5) || streetElement[1] === (thirdPersonCamera.position.x + 0.5) - 1)
+                    ))
+                )
+            {
+                thirdPersonCamera.position.x -= (0.05 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
+                thirdPersonCamera.position.z -= (0.05 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
+            } 
+            else 
+            {    
+                thirdPersonCamera.position.x += (0.01 * currentSpeed/10) * Math.sin(thirdPersonCamera.rotation.y)
+                thirdPersonCamera.position.z += (0.01 * currentSpeed/10) * Math.cos(thirdPersonCamera.rotation.y)
+                currentSpeed = 0
             }
-        }
+            if (currentSpeed < 100) currentSpeed += 2
+        } 
+        
         if (input.keys.includes("s")) {
-            if (currentSpeed > -100) currentSpeed -= 1
-            thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
-            thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
-        } else {
+            
+            if (
+                movementConstraintsArray.some(streetElement => 
+                    (
+                        (streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) || streetElement[0] === (thirdPersonCamera.position.x + 0.5) - 1) && 
+                        (streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5) || streetElement[1] === (thirdPersonCamera.position.z + 0.5) - 1)
+                    ))
+                )
+            {
+                thirdPersonCamera.position.x += (0.025 * Math.abs(currentSpeed)/100) * Math.sin(thirdPersonCamera.rotation.y)
+                thirdPersonCamera.position.z += (0.025 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
+            } 
+            if (movementConstraintsArray.some(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5))) 
+            // else
+            // { 
+            //         thirdPersonCamera.position.x -= (0.01 * Math.abs(currentSpeed)/100) * Math.sin(thirdPersonCamera.rotation.y)
+            //         thirdPersonCamera.position.z -= (0.01 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
+            //         currentSpeed = 0
+            //     }
+            if (currentSpeed > -100) currentSpeed -= 2
+        } 
+
+        // if (
+        //     !movementConstraintsArray.some(streetElement => 
+        //         (
+        //             (streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) || streetElement[0] === (thirdPersonCamera.position.x + 0.5) - 1) && 
+        //             (streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5) || streetElement[1] === (thirdPersonCamera.position.z + 0.5) - 1)
+        //         ))
+        //     )
+        // {
+        //     thirdPersonCamera.position.x = (0.025 * Math.abs(currentSpeed)/100) * Math.sin(thirdPersonCamera.rotation.y)
+        //     thirdPersonCamera.position.z = (0.025 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
+        // }
+
+        if (!input.keys.includes("w") && !input.keys.includes("s")) {
+            if (currentSpeed > 0) {
+                if (movementConstraintsArray.some(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5))) {
+                    thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
+                    thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
+                }
+            }
             if (currentSpeed < 0) {
-                currentSpeed += 1
-                thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
-                thirdPersonCamera.position.z -= (0.06 * currentSpeed/100) * Math.cos(thirdPersonCamera.rotation.y)
+                if (movementConstraintsArray.some(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5))) {
+                    thirdPersonCamera.position.x += (0.03 * Math.abs(currentSpeed)/100) * Math.sin(thirdPersonCamera.rotation.y)
+                    thirdPersonCamera.position.z += (0.03 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
+                }
             }
         }
 
