@@ -4,7 +4,6 @@ import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { generateMap } from './envGen'
 import { Group } from 'three'
-import CANNON from 'cannon'
 
 //Function
 
@@ -38,26 +37,21 @@ function runCreationScript(objects) {
     scene.background = fogColor
     scene.fog = new THREE.Fog(fogColor, 0.000025, 20)
 
-    const axesHelper = new THREE.AxesHelper(1)
-
-    scene.add(axesHelper)
 
     // Lights
 
-    const pointLight1 = new THREE.PointLight(0xffaa55, 1, 0)
+    const pointLight1 = new THREE.PointLight(0xff0000, 1, 0)
     scene.add(pointLight1)
     pointLight1.position.y = 10
     pointLight1.position.z = 50
     pointLight1.position.x = 50
 
-    // const pointLight2 = new THREE.PointLight(0xffffff, 0.6, 0)
+    // const pointLight2 = new THREE.PointLight(0xffffff, 0.2, 0)
     // scene.add(pointLight2)
-    // pointLight2.position.z = 2
-    // pointLight2.position.y = -2
-    // pointLight2.position.z = 200
-    // pointLight2.position.y = 200
+    // pointLight2.position.y = 0.5
 
-    const pointLight3 = new THREE.PointLight(0xff3333, 0.7, 0)
+
+    const pointLight3 = new THREE.PointLight(0x0000ff, 0.7, 0)
     pointLight3.position.y = 10
     scene.add(pointLight3)
 
@@ -232,8 +226,6 @@ function runCreationScript(objects) {
         mesh.rotation.y = Math.PI/180 * ((Math.floor(Math.random() * 2) * 180) + 90)
         scene.add( mesh );
     }
-
-    
 
     const playerPositionStart = [0, 0]
     const movementConstraintsArray = []
@@ -814,10 +806,14 @@ function runCreationScript(objects) {
 
         requestAnimationFrame( animate );
         // console.log([thirdPersonCamera.position.x.toFixed(1), thirdPersonCamera.position.z.toFixed(1), currentSpeed])
-        console.log(Math.floor(thirdPersonCamera.position.x + 0.5), thirdPersonCamera.position.x.toFixed(2))
-        console.log(Math.floor(thirdPersonCamera.position.z + 0.5), thirdPersonCamera.position.z.toFixed(2))
-        console.log(movementConstraintsArray.find(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5)))
+        // console.log(Math.floor(thirdPersonCamera.position.x + 0.5), thirdPersonCamera.position.x.toFixed(2))
+        // console.log(Math.floor(thirdPersonCamera.position.z + 0.5), thirdPersonCamera.position.z.toFixed(2))
+        // console.log(movementConstraintsArray.find(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5)))
 
+        //
+        // pointLight2.position.x = thirdPersonCamera.position.x
+        // pointLight2.position.z = thirdPersonCamera.position.z + 2
+        // console.log(pointLight2.position)
         // player movement
 
         if (wheelRotationRatio > 0) wheelRotationRatio -= 1
@@ -880,6 +876,7 @@ function runCreationScript(objects) {
         }
 
         // console.log(Math.floor((thirdPersonCamera.rotation.y / Math.PI) * 4) * Math.PI)
+        // console.log(thirdPersonCamera.position.x + 0.5)
 
         if (input.keys.includes("w")) {
             
