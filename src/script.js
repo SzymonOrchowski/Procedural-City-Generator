@@ -33,24 +33,24 @@ function runCreationScript(objects) {
     // Scene & FOG
 
     const scene = new THREE.Scene()
-    const fogColor = new THREE.Color(0xaaaaaa)
+    const fogColor = new THREE.Color(0xf7dc9c)
 
     scene.background = fogColor
-    scene.fog = new THREE.Fog(fogColor, 0.000025, 40)
+    scene.fog = new THREE.Fog(fogColor, 0.000025, 25)
 
     // Lights
 
-    const pointLight1 = new THREE.PointLight(0xffffff, 1, 0)
+    const pointLight1 = new THREE.PointLight(0xffffff, 0.4, 0)
     scene.add(pointLight1)
     pointLight1.position.y = 10
     pointLight1.position.z = 50
     pointLight1.position.x = 50
 
-    // const pointLight2 = new THREE.PointLight(0xffffff, 0.2, 0)
-    // scene.add(pointLight2)
-    // pointLight2.position.y = 0.5
+    const pointLight2 = new THREE.PointLight(0xffffff, 0.2, 0)
+    scene.add(pointLight2)
+    pointLight2.position.y = 0.7
 
-    const pointLight3 = new THREE.PointLight(0xffffff, 0.7, 0)
+    const pointLight3 = new THREE.PointLight(0xffffff, 0.4, 0)
     pointLight3.position.y = 10
     scene.add(pointLight3)
 
@@ -846,8 +846,8 @@ function runCreationScript(objects) {
         // console.log(streetSquaresArray.find(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5)))
 
         //
-        // pointLight2.position.x = thirdPersonCamera.position.x
-        // pointLight2.position.z = thirdPersonCamera.position.z + 2
+        pointLight2.position.x = thirdPersonCamera.position.x
+        pointLight2.position.z = thirdPersonCamera.position.z + 1
         // console.log(pointLight2.position)
         // player movement
 
