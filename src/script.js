@@ -1,7 +1,8 @@
 import './style.css'
 import * as THREE from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { generateMap } from './envGen'
 import { Group } from 'three'
@@ -46,17 +47,17 @@ function runCreationScript(objects) {
     pointLight1.position.z = 50
     pointLight1.position.x = 50
 
-    const pointLight2 = new THREE.PointLight(0xffffff, 0.2, 0)
-    scene.add(pointLight2)
-    pointLight2.position.y = 0.7
-
+    
     const pointLight3 = new THREE.PointLight(0xffffff, 0.4, 0)
     pointLight3.position.y = 10
     scene.add(pointLight3)
-
-        
+    
+    
     const light = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.1 ); 
     scene.add( light );
+
+    // Light over the player added in thirdPersonCamera
+    const pointLight2 = new THREE.PointLight(0xffffff, 0.8, 0)
 
     // Camera
 
@@ -302,7 +303,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ + 1).used
                                 ) 
                             {
-                                if (probability > 0.7) {
+                                if (probability > 0) {
                                     createBuilding6x2([element.positionX,1,element.positionZ])
                                     buildingSquaresArray.push([element.positionX, element.positionZ])
                                     buildingSquaresArray.push([element.positionX, element.positionZ + 1])
@@ -376,7 +377,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionZ === element.positionZ + 5 && square.positionX === element.positionX + 1).used
                                 ) 
                             {
-                                if (probability > 0.7) {
+                                if (probability > 0) {
                                     createBuilding2x6([element.positionX,1,element.positionZ])
                                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
                                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true
@@ -397,367 +398,367 @@ function runCreationScript(objects) {
 
             // 5x3
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                    if (
-                        array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2)
-                        ) 
-                    {
-                            if (
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).used 
-                                ) 
-                            {
-                                if (probability > 0.5) {
-                                    createBuilding5x3([element.positionX,1,element.positionZ])
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).used = true
-                                } 
-                            }
-                    } 
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //         if (
+            //             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2)
+            //             ) 
+            //         {
+            //                 if (
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).used 
+            //                     ) 
+            //                 {
+            //                     if (probability > 0.5) {
+            //                         createBuilding5x3([element.positionX,1,element.positionZ])
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).used = true
+            //                     } 
+            //                 }
+            //         } 
+            // }
 
             // 3x5
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                    if (
-                        array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1) &&
-                        array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2) &&
-                        array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX) &&
-                        array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1) &&
-                        array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2) &&
-                        array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX) &&
-                        array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1) &&
-                        array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2) &&
-                        array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX) &&
-                        array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1) &&
-                        array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2) &&
-                        array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX) &&
-                        array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1) &&
-                        array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2)
-                        ) 
-                    {
-                            if (
-                                array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used &&
-                                array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2).used &&
-                                array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used &&
-                                array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used &&
-                                array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2).used &&
-                                array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used &&
-                                array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used &&
-                                array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2).used &&
-                                array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX).used &&
-                                array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1).used &&
-                                array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2).used &&
-                                array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX).used &&
-                                array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1).used &&
-                                array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).used 
-                                ) 
-                            {
-                                if (probability > 0.5) {
-                                    createBuilding3x5([element.positionX,1,element.positionZ])
-                                    array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
-                                    array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true
-                                    array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1).used = true
-                                    array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).used = true
-                                } 
-                            }
-                    } 
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //         if (
+            //             array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1) &&
+            //             array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2) &&
+            //             array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX) &&
+            //             array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1) &&
+            //             array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2) &&
+            //             array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX) &&
+            //             array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1) &&
+            //             array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2) &&
+            //             array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX) &&
+            //             array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1) &&
+            //             array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2) &&
+            //             array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX) &&
+            //             array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1) &&
+            //             array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2)
+            //             ) 
+            //         {
+            //                 if (
+            //                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used &&
+            //                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1).used &&
+            //                     array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).used 
+            //                     ) 
+            //                 {
+            //                     if (probability > 0.5) {
+            //                         createBuilding3x5([element.positionX,1,element.positionZ])
+            //                         array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
+            //                         array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true
+            //                         array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 2).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 2).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 2).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 1).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 3 && square.positionX === element.positionX + 2).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 1).used = true
+            //                         array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).used = true
+            //                     } 
+            //                 }
+            //         } 
+            // }
 
             // 4x4
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                    if (
-                        array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2) &&
-                        array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3)
-                        ) 
-                    {
-                            if (
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used &&
-                                array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
-                               !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used
-                                ) 
-                            {
-                                if (probability > 0.6) {
-                                    createBuilding4x4([element.positionX,1,element.positionZ])
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used = true
-                                    array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used = true
-                                } 
-                            }
-                    } 
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //         if (
+            //             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2) &&
+            //             array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3)
+            //             ) 
+            //         {
+            //                 if (
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used &&
+            //                     array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).terrainType === 'building' &&
+            //                    !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used
+            //                     ) 
+            //                 {
+            //                     if (probability > 0.6) {
+            //                         createBuilding4x4([element.positionX,1,element.positionZ])
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 3).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 3).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 3).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 1).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 2).used = true
+            //                         array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used = true
+            //                     } 
+            //                 }
+            //         } 
+            // }
 
             // 2x3
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                if (
-                    array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1) &&
-                    array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX) &&
-                    array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1) &&
-                    array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX) &&
-                    array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1)
-                    ) 
-                {
-                        if (
-                            array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                           !array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used &&
-                            array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).terrainType === 'building' &&
-                           !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used &&
-                            array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                           !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used &&
-                            array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).terrainType === 'building' &&
-                           !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used &&
-                            array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).terrainType === 'building' &&
-                           !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used
-                            ) 
-                        {
-                            if (probability > 0.5) {
-                                createBuilding2x3([element.positionX,1,element.positionZ])
-                                array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
-                                array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true 
-                                array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used = true
-                                array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used = true
-                                array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used = true
-                                array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used = true
-                            }
-                        } 
-                }  
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //     if (
+            //         array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1) &&
+            //         array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX) &&
+            //         array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1) &&
+            //         array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX) &&
+            //         array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1)
+            //         ) 
+            //     {
+            //             if (
+            //                 array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                !array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used &&
+            //                 array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).terrainType === 'building' &&
+            //                !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used &&
+            //                 array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                !array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used &&
+            //                 array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).terrainType === 'building' &&
+            //                !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used &&
+            //                 array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).terrainType === 'building' &&
+            //                !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used
+            //                 ) 
+            //             {
+            //                 if (probability > 0.5) {
+            //                     createBuilding2x3([element.positionX,1,element.positionZ])
+            //                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
+            //                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true 
+            //                     array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX).used = true
+            //                     array.find(square => square.positionZ === element.positionZ + 1 && square.positionX === element.positionX + 1).used = true
+            //                     array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX).used = true
+            //                     array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used = true
+            //                 }
+            //             } 
+            //     }  
+            // }
 
             // 3x2
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                if (
-                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
-                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
-                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1) &&
-                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ) &&
-                    array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1)
-                    ) 
-                {
-                        if (
-                            array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                           !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
-                            array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                           !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
-                            array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                           !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
-                            array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                           !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
-                            array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                           !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used
-                            ) 
-                        {
-                            if (probability > 0.5) {
-                                createBuilding3x2([element.positionX,1,element.positionZ])
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true 
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used = true
-                                array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used = true
-                            }
-                        } 
-                }  
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //     if (
+            //         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
+            //         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
+            //         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1) &&
+            //         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ) &&
+            //         array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1)
+            //         ) 
+            //     {
+            //             if (
+            //                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
+            //                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
+            //                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used &&
+            //                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used &&
+            //                 array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used
+            //                 ) 
+            //             {
+            //                 if (probability > 0.5) {
+            //                     createBuilding3x2([element.positionX,1,element.positionZ])
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true 
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ).used = true
+            //                     array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used = true
+            //                 }
+            //             } 
+            //     }  
+            // }
 
             // 2x2
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                if (array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
-                    array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
-                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1)
-                    ) 
-                {
-                        if (
-                            array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                            !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
-                            array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                            !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
-                            array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
-                            !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used
-                            ) 
-                        {
-                            if (probability > 0.9) {
-                                createBuilding2x2([element.positionX,1,element.positionZ])
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
-                                array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true 
-                                array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
-                            }
-                        } 
-                }  
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //     if (array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ) &&
+            //         array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1) &&
+            //         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1)
+            //         ) 
+            //     {
+            //             if (
+            //                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //                 !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used &&
+            //                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                 !array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used &&
+            //                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).terrainType === 'building' &&
+            //                 !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used
+            //                 ) 
+            //             {
+            //                 if (probability > 0.9) {
+            //                     createBuilding2x2([element.positionX,1,element.positionZ])
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
+            //                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true 
+            //                     array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used = true
+            //                 }
+            //             } 
+            //     }  
+            // }
 
             // 2x1
 
-            if (element.terrainType === 'building' && !element.used) {
-                const probability = Math.random()
-                if (
-                    array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ )
-                    ) 
-                {
-                    if (
-                        array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
-                        !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used
-                        ) 
-                    {
-                        if (probability > 0.8) {
-                            createBuilding2x1([element.positionX,1,element.positionZ])
-                            array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
-                            array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
-                        }
-                    } 
-                }  
-            }
+            // if (element.terrainType === 'building' && !element.used) {
+            //     const probability = Math.random()
+            //     if (
+            //         array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ )
+            //         ) 
+            //     {
+            //         if (
+            //             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).terrainType === 'building' &&
+            //             !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used
+            //             ) 
+            //         {
+            //             if (probability > 0.8) {
+            //                 createBuilding2x1([element.positionX,1,element.positionZ])
+            //                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
+            //                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
+            //             }
+            //         } 
+            //     }  
+            // }
 
             // 1x1
 
-            if (element.terrainType === 'building' && !element.used) 
-            {
-                const variant = Math.floor(Math.random() * 29.9)
-                // if (variant < 20)
-                if (variant >= 22 && variant < 25) createBuilding1x1A([element.positionX,1,element.positionZ])
-                if (variant === 25) createBuilding1x1B([element.positionX,1,element.positionZ])
-                if (variant > 25) createBuilding1x1C([element.positionX,1,element.positionZ])
-            }
+            // if (element.terrainType === 'building' && !element.used) 
+            // {
+            //     const variant = Math.floor(Math.random() * 29.9)
+            //     // if (variant < 20)
+            //     if (variant >= 22 && variant < 25) createBuilding1x1A([element.positionX,1,element.positionZ])
+            //     if (variant === 25) createBuilding1x1B([element.positionX,1,element.positionZ])
+            //     if (variant > 25) createBuilding1x1C([element.positionX,1,element.positionZ])
+            // }
 
         })
         // controls.target.set(sideElements / 2, 0, sideElements / 2)
@@ -821,8 +822,12 @@ function runCreationScript(objects) {
 
     // Player
 
-    const player = car.clone()
-    player.scale.set(.0025,.0025,.0025)
+    const player = car.scene
+    player.scale.set(.25,.25,.25)
+    const playerWheelFrontL = player.children.filter(object => object.name === 'Front-L')[0]
+    const playerWheelFrontR = player.children.filter(object => object.name === 'Front-R')[0]
+    const playerWheelBackL = player.children.filter(object => object.name === 'Back-L')[0]
+    const playerWheelBackR = player.children.filter(object => object.name === 'Back-R')[0]
     player.position.y = 0.1
     scene.add(player)
 
@@ -834,9 +839,13 @@ function runCreationScript(objects) {
     const thirdPersonCamera = new Group()
     thirdPersonCamera.add(player)
     thirdPersonCamera.add(camera)
+    thirdPersonCamera.add(pointLight2)
     camera.position.set(player.position.x, 0.8, player.position.z + 1)
     thirdPersonCamera.position.x = playerPositionStart[0]
     thirdPersonCamera.position.z = playerPositionStart[1]
+    pointLight2.position.x = thirdPersonCamera.position.x
+    pointLight2.position.z = thirdPersonCamera.position.z - 1
+    pointLight2.position.y = 0.3
     scene.add(thirdPersonCamera)
 
     // Speed
@@ -857,8 +866,6 @@ function runCreationScript(objects) {
         const delta = clock.getDelta();
 
         //
-        pointLight2.position.x = thirdPersonCamera.position.x
-        pointLight2.position.z = thirdPersonCamera.position.z + 1
         // console.log(pointLight2.position)
         // player movement
 
@@ -884,17 +891,17 @@ function runCreationScript(objects) {
                 thirdPersonCamera.rotation.y -= 0.04
             } 
            
-            player.children[1].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
-            player.children[3].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
-            player.children[2].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
-            player.children[4].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            playerWheelFrontL.rotation.y = Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            playerWheelFrontR.rotation.y = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            playerWheelBackL.rotation.y = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+            playerWheelBackR.rotation.y = Math.PI / 180 * (30 * wheelRotationRatio/10) 
 
         } else {
             if (wheelRotationRatio < 0 && wheelRotationRatio > -10) {
-                player.children[1].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
-                player.children[3].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
-                player.children[2].rotation.z = Math.PI / 180 * (30 * wheelRotationRatio/10) 
-                player.children[4].rotation.z = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                playerWheelFrontL.rotation.y = Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                playerWheelFrontR.rotation.y = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                playerWheelBackL.rotation.y = -Math.PI / 180 * (30 * wheelRotationRatio/10) 
+                playerWheelBackR.rotation.y = Math.PI / 180 * (30 * wheelRotationRatio/10) 
             }
         }
 
@@ -908,21 +915,19 @@ function runCreationScript(objects) {
             if (currentSpeed < 0) {
                 thirdPersonCamera.rotation.y += 0.04
             }
-            player.children[1].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
-            player.children[3].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
-            player.children[2].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
-            player.children[4].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            playerWheelFrontL.rotation.y = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            playerWheelFrontR.rotation.y = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            playerWheelBackL.rotation.y = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+            playerWheelBackR.rotation.y = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
         } else {
             if (wheelRotationRatio > 0 && wheelRotationRatio < 10) {
 
-                player.children[1].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
-                player.children[3].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
-                player.children[2].rotation.z = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
-                player.children[4].rotation.z = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                playerWheelFrontL.rotation.y = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                playerWheelFrontR.rotation.y = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                playerWheelBackL.rotation.y = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
+                playerWheelBackR.rotation.y = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
             }
         }
-
-        // console.log(thirdPersonCamera.position.x + 0.5)
 
         if (input.keys.includes("w") || input.keys.includes("ArrowUp")) {
             
@@ -1060,9 +1065,14 @@ manager.onError = function ( url )
 const loader = new FBXLoader( manager ); 
 const gltfloader = new GLTFLoader( manager);
 
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('/draco/')
+
+gltfloader.setDRACOLoader(dracoLoader)
+
 /// Player object load to load manager
 
-loader.load('./objects/car1.fbx', function ( object ) { 
+gltfloader.load('./objects/car.glb', function ( object ) { 
     car = object
  } );
 
