@@ -773,28 +773,44 @@ function runCreationScript(objects) {
         constructor(){
             this.keys = []
             window.addEventListener('keydown', (e) => {
-                if ((e.key === "a" || e.key === "d") && this.keys.indexOf(e.key) === -1) 
-                {
-                    this.keys.push(e.key)
-                }
 
-                if (e.key === "w" && this.keys.indexOf(e.key) === -1) 
-                {
-                this.keys.push(e.key)
-                if (this.keys.indexOf("s") !== -1) this.keys.splice(this.keys.indexOf("s"), 1)
-                }
+                if ((
+                    e.key === "a" || 
+                    e.key === "d" || 
+                    e.key === "ArrowLeft" ||
+                    e.key === "ArrowRight") && this.keys.indexOf(e.key) === -1) 
+                    {
+                        this.keys.push(e.key)
+                    }
 
-                if (e.key === "s" && this.keys.indexOf(e.key) === -1) 
-                {
-                this.keys.push(e.key)
-                if (this.keys.indexOf("w") !== -1) this.keys.splice(this.keys.indexOf("w"), 1)
-                }
+                if ((
+                    e.key === "w" || 
+                    e.key === "ArrowUp"
+                    ) && this.keys.indexOf(e.key) === -1) 
+                    {
+                        this.keys.push(e.key)
+                        if (this.keys.indexOf("s") !== -1) this.keys.splice(this.keys.indexOf("s"), 1)
+                    }
+
+                if ((
+                    e.key === "s" ||
+                    e.key === "ArrowDown") && this.keys.indexOf(e.key) === -1) 
+                    {
+                        this.keys.push(e.key)
+                        if (this.keys.indexOf("w") !== -1) this.keys.splice(this.keys.indexOf("w"), 1)
+                    }
+
             })
             window.addEventListener('keyup', (e) => {
                 if (e.key === "a" || 
                     e.key === "s" ||
                     e.key === "d" ||
-                    e.key === "w" ) {
+                    e.key === "w" ||
+                    e.key === "ArrowLeft" ||
+                    e.key === "ArrowRight" ||
+                    e.key === "ArrowUp" ||
+                    e.key === "ArrowDown") 
+                    {
                     this.keys.splice(this.keys.indexOf(e.key), 1)
                     }
             })
@@ -840,11 +856,6 @@ function runCreationScript(objects) {
         requestAnimationFrame( animate );
         const delta = clock.getDelta();
 
-        // console.log([thirdPersonCamera.position.x.toFixed(1), thirdPersonCamera.position.z.toFixed(1)])
-        // console.log(Math.floor(thirdPersonCamera.position.x + 0.5), thirdPersonCamera.position.x.toFixed(2))
-        // console.log(Math.floor(thirdPersonCamera.position.z + 0.5), thirdPersonCamera.position.z.toFixed(2))
-        // console.log(streetSquaresArray.find(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5)))
-
         //
         pointLight2.position.x = thirdPersonCamera.position.x
         pointLight2.position.z = thirdPersonCamera.position.z + 1
@@ -862,7 +873,7 @@ function runCreationScript(objects) {
         if (currentSpeed < 0) currentSpeed += 1
 
 
-        if (input.keys.includes("a")) 
+        if (input.keys.includes("a") || input.keys.includes("ArrowLeft")) 
         {
             if (wheelRotationRatio > -10) wheelRotationRatio -= 2
             if (currentSpeed > 0) {
@@ -887,7 +898,7 @@ function runCreationScript(objects) {
             }
         }
 
-        if (input.keys.includes("d")) 
+        if (input.keys.includes("d") || input.keys.includes("ArrowRight")) 
         { 
             if (wheelRotationRatio < 10) wheelRotationRatio += 2
             if (currentSpeed > 0) {
@@ -913,7 +924,7 @@ function runCreationScript(objects) {
 
         // console.log(thirdPersonCamera.position.x + 0.5)
 
-        if (input.keys.includes("w")) {
+        if (input.keys.includes("w") || input.keys.includes("ArrowUp")) {
             
             if (
                 streetSquaresArray.some(streetElement => 
@@ -935,7 +946,7 @@ function runCreationScript(objects) {
             if (currentSpeed < 100) currentSpeed += 2
         } 
         
-        if (input.keys.includes("s")) {
+        if (input.keys.includes("s") || input.keys.includes("ArrowDown")) {
             
             if (
                 streetSquaresArray.some(streetElement => 
@@ -970,7 +981,7 @@ function runCreationScript(objects) {
         //     thirdPersonCamera.position.z = (0.025 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
         // }
 
-        if (!input.keys.includes("w") && !input.keys.includes("s")) {
+        if (!input.keys.includes("w") && !input.keys.includes("s") && !input.keys.includes("ArrowUp") && !input.keys.includes("ArrowDown")) {
             if (currentSpeed > 0) {
                 if (streetSquaresArray.some(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5))) {
                     thirdPersonCamera.position.x -= (0.06 * currentSpeed/100) * Math.sin(thirdPersonCamera.rotation.y)
