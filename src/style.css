@@ -2,24 +2,69 @@ body {
     background-color: black;
     margin: 0px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: white
+    color: white;
+    text-align: center;
 }
 
 #loading_screen {
-    visibility: visible;
     position: absolute;
     background-color: red;
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 #main_menu {
-    visibility: hidden;
     color: #000000;
     position: absolute;
     background-color: #f7dc9c;
     width: 100%;
-    height: 100%;
+    height: min-content;
+    padding-bottom: 10px;
+}
+
+#settings-form div {
+    /* border: red 1px solid; */
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 12px;
+}
+
+#generate-button {
+    font-size: 1.4em;
+    margin: 20px;
+    padding: 10px;
+}
+
+#colors {
+    width: 220px;
+    text-align: left;
+    padding-bottom: 0px;
+}
+
+#back-to-menu-button {
+    display: none;
+    color: black;
+    background-color: rgb(255, 255, 255, 0.7);
+    top: 23px;
+    left: 23px;
+    padding: 10px 0px 0px 0px;
+    border: solid black 1px;
+    border-radius: 15px;
+    width: 120px;
+    height: 30px;
+    position: absolute;
+}
+
+#back-to-menu-button:hover {
+    background-color: rgb(255, 255, 255, 0.9);
+    padding: 13px 0px 0px 0px;
+    border-radius: 18px;
+    cursor: pointer;
+    top: 20px;
+    left: 20px;
+    width: 126px;
+    height: 36px;
 }
 
 /* h3 {

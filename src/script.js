@@ -27,8 +27,25 @@ const settings = {
 
 // Menu 
 
+document.getElementById('default_fog_color_button').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementsByName('fog-color')[0].value = '#f7dc9c'
+})
+document.getElementById('default_light1_color_button').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementsByName('light1-color')[0].value = '#ffffff'
+})
+document.getElementById('default_light2_color_button').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementsByName('light2-color')[0].value = '#ffffff'
+})
+document.getElementById('default_car_color_button').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementsByName('car-color')[0].value = '#ffffff'
+})
+
 document.getElementById('generate-button').addEventListener('click', () => {
-    document.getElementById('main_menu').style.visibility = "hidden"
+    document.getElementById('main_menu').style.display = 'none'
     settings.mapSize = Number(document.getElementsByName('mapsize')[0].value)
     settings.prob6x2 = Number(document.getElementsByName('sixtwo')[0].value)
     settings.prob5x3 = Number(document.getElementsByName('fivethree')[0].value)
@@ -39,7 +56,11 @@ document.getElementById('generate-button').addEventListener('click', () => {
     settings.prob1x1A = Number(document.getElementsByName('oneoneA')[0].value)
     settings.prob1x1B = Number(document.getElementsByName('oneoneB')[0].value)
     settings.prob1x1C = Number(document.getElementsByName('oneoneC')[0].value)
-    console.log(settings)
+    settings.fogColor = document.getElementsByName('fog-color')[0].value
+    settings.light1Color = document.getElementsByName('light1-color')[0].value
+    settings.light2Color = document.getElementsByName('light2-color')[0].value
+    settings.carColor = document.getElementsByName('car-color')[0].value
+    document.getElementById('back-to-menu-button').style.display = 'block'
     runCreationScript(settings)
 })
 
@@ -1240,13 +1261,13 @@ let building6x2A_obj;
 
 manager.onStart = function ( url, itemsLoaded, itemsTotal ) 
 { 
-    document.getElementById('loading_screen').style.visibility = "visible"
+    document.getElementById('loading_screen').style.display = "block"
     console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' ); 
 }; 
 manager.onLoad = function ( ) 
 { 
-    document.getElementById('loading_screen').style.visibility = "hidden"
-    document.getElementById('main_menu').style.visibility = "visible"
+    document.getElementById('loading_screen').style.display = "none"
+    document.getElementById('main_menu').style.display = "block"
     console.log( 'Loading complete!'); 
     // runCreationScript(settings);
 }; 
