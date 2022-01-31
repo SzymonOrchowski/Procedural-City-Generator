@@ -73,7 +73,7 @@ const presets = [
         prob1x1A: 0,
         prob1x1B: 0,
         prob1x1C: 10,
-        fogColor: '#f7dc9c',
+        fogColor: '#e9e5f2',
         light1Color: '#ffffff',
         light2Color: '#ffffff',
         carColor: '#ffffff',
@@ -89,10 +89,10 @@ const presets = [
         prob1x1A: 0,
         prob1x1B: 10,
         prob1x1C: 0,
-        fogColor: '#f7dc9c',
+        fogColor: '#bceeac',
         light1Color: '#ffffff',
-        light2Color: '#ffffff',
-        carColor: '#ffffff',
+        light2Color: '#fcffc5',
+        carColor: '#67442f',
     },
     {
         name: 'preset5',
@@ -101,14 +101,14 @@ const presets = [
         prob4x4: 0,
         prob3x2: 0,
         prob2x2: 0,
-        prob2x1: 4,
+        prob2x1: 2,
         prob1x1A: 0,
         prob1x1B: 0,
         prob1x1C: 0,
-        fogColor: '#f7dc9c',
+        fogColor: '#f2b69c',
         light1Color: '#ffffff',
         light2Color: '#ffffff',
-        carColor: '#ffffff',
+        carColor: '#ff0000',
     },
     {
         name: 'preset6',
@@ -121,26 +121,42 @@ const presets = [
         prob1x1A: 10,
         prob1x1B: 0,
         prob1x1C: 0,
-        fogColor: '#f7dc9c',
+        fogColor: '#d5eaef',
         light1Color: '#ffffff',
         light2Color: '#ffffff',
-        carColor: '#ffffff',
+        carColor: '#fcc700',
     },
     {
         name: 'preset7',
         prob6x2: 0,
-        prob5x3: 8,
-        prob4x4: 0,
-        prob3x2: 0,
+        prob5x3: 9,
+        prob4x4: 4,
+        prob3x2: 5,
         prob2x2: 0,
         prob2x1: 0,
         prob1x1A: 0,
         prob1x1B: 0,
         prob1x1C: 0,
         fogColor: '#f7dc9c',
-        light1Color: '#ffffff',
-        light2Color: '#ffffff',
-        carColor: '#ffffff',
+        light1Color: '#f8eba4',
+        light2Color: '#f0d1a8',
+        carColor: '#ffedce',
+    },
+    {
+        name: 'preset8',
+        prob6x2: 0,
+        prob5x3: 0,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 8,
+        prob2x1: 0,
+        prob1x1A: 0,
+        prob1x1B: 0,
+        prob1x1C: 0,
+        fogColor: '#96bbf2',
+        light1Color: '#a1ceff',
+        light2Color: '#d8c3ff',
+        carColor: '#d8e1fb',
     }
 ]
 
@@ -197,6 +213,10 @@ document.getElementById('generate-button').addEventListener('click', () => {
     settings.light2Color = document.getElementsByName('light2-color')[0].value
     settings.carColor = document.getElementsByName('car-color')[0].value
     document.getElementById('back-to-menu-button').style.display = 'block'
+    console.log('Fog -> ', settings.fogColor)
+    console.log('Light1 -> ', settings.light1Color)
+    console.log('Light1 -> ', settings.light2Color)
+    console.log('Car -> ', settings.carColor)
     runCreationScript(settings)
 })
 
