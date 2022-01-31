@@ -25,6 +25,125 @@ const settings = {
     carColor: 0xffffff,
 }
 
+// Presets
+
+// // preset 1 - empty
+
+const presets = [
+    {
+        name: 'preset1',
+        prob6x2: 0,
+        prob5x3: 0,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 0,
+        prob2x1: 0,
+        prob1x1A: 0,
+        prob1x1B: 0,
+        prob1x1C: 0,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    },
+    {
+        name: 'preset2',
+        prob6x2: 6,
+        prob5x3: 6,
+        prob4x4: 6,
+        prob3x2: 6,
+        prob2x2: 6,
+        prob2x1: 6,
+        prob1x1A: 6,
+        prob1x1B: 6,
+        prob1x1C: 6,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    },
+    {
+        name: 'preset3',
+        prob6x2: 0,
+        prob5x3: 0,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 0,
+        prob2x1: 0,
+        prob1x1A: 0,
+        prob1x1B: 0,
+        prob1x1C: 10,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    },
+    {
+        name: 'preset4',
+        prob6x2: 0,
+        prob5x3: 0,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 0,
+        prob2x1: 0,
+        prob1x1A: 0,
+        prob1x1B: 10,
+        prob1x1C: 0,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    },
+    {
+        name: 'preset5',
+        prob6x2: 0,
+        prob5x3: 0,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 0,
+        prob2x1: 4,
+        prob1x1A: 0,
+        prob1x1B: 0,
+        prob1x1C: 0,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    },
+    {
+        name: 'preset6',
+        prob6x2: 0,
+        prob5x3: 0,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 0,
+        prob2x1: 0,
+        prob1x1A: 10,
+        prob1x1B: 0,
+        prob1x1C: 0,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    },
+    {
+        name: 'preset7',
+        prob6x2: 0,
+        prob5x3: 8,
+        prob4x4: 0,
+        prob3x2: 0,
+        prob2x2: 0,
+        prob2x1: 0,
+        prob1x1A: 0,
+        prob1x1B: 0,
+        prob1x1C: 0,
+        fogColor: '#f7dc9c',
+        light1Color: '#ffffff',
+        light2Color: '#ffffff',
+        carColor: '#ffffff',
+    }
+]
+
 // Menu 
 
 document.getElementById('default_fog_color_button').addEventListener('click', (e) => {
@@ -42,6 +161,23 @@ document.getElementById('default_light2_color_button').addEventListener('click',
 document.getElementById('default_car_color_button').addEventListener('click', (e) => {
     e.preventDefault()
     document.getElementsByName('car-color')[0].value = '#ffffff'
+})
+
+document.getElementById('preset_select').addEventListener('change', (e) => {
+    const preset = presets.find(preset => preset.name === e.target.value)
+    document.getElementsByName('sixtwo')[0].value = preset.prob6x2
+    document.getElementsByName('fivethree')[0].value = preset.prob5x3
+    document.getElementsByName('fourfour')[0].value = preset.prob4x4
+    document.getElementsByName('threetwo')[0].value = preset.prob5x3
+    document.getElementsByName('twotwo')[0].value = preset.prob2x2
+    document.getElementsByName('twoone')[0].value = preset.prob2x1
+    document.getElementsByName('oneoneA')[0].value = preset.prob1x1A
+    document.getElementsByName('oneoneB')[0].value = preset.prob1x1B
+    document.getElementsByName('oneoneC')[0].value = preset.prob1x1C
+    document.getElementsByName('fog-color')[0].value = preset.fogColor
+    document.getElementsByName('light1-color')[0].value = preset.light1Color
+    document.getElementsByName('light2-color')[0].value = preset.light2Color
+    document.getElementsByName('car-color')[0].value = preset.carColor
 })
 
 document.getElementById('generate-button').addEventListener('click', () => {

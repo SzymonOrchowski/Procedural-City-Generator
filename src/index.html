@@ -14,13 +14,26 @@
         <h1>Random level generator</h1>
         <div id='made_by'>
             Made by: <br/>
-            <a href="http://www.szymonorchowski.co.uk">Szymon Orchowski</a> & <a href="https://www.artstation.com/tymosulek/blog">Tymoteusz Sulek</a>
+            <a href="http://www.szymonorchowski.co.uk">Szymon Orchowski</a> 
+            & <a href="https://www.artstation.com/tymosulek/blog">Tymoteusz Sulek</a>
         </div>
         <form id="settings-form">
             <div id='mapsize-container'>
                 <label>Map size</label>
                 <input type='range' id="mapsize" name="mapsize" min='10' max='100' value='10' step='1' oninput="range_mapsize_disp.value = this.value; range_mapsize_disp2.value = this.value"/>
                 <output id="range_mapsize_disp">10</output><span>x</span><output style="margin-left: 0px;" id="range_mapsize_disp2">10</output>    
+            </div>
+            <div id='presets-container'>
+                <label>Preset:</label>
+                <select name='preset_select' id='preset_select'>
+                    <option value='preset1'>-</option>
+                    <option value='preset2'>Mixture of everything</option>
+                    <option value='preset3'>Ancient temple</option>
+                    <option value='preset4'>In the forest of lifts</option>
+                    <option value='preset5'>World of radiators</option>
+                    <option value='preset6'>Fields of boxes</option>
+                    <option value='preset7'>Mining the desert</option>
+                </select>
             </div>
             <div id='probabilities-container'>
                 <h3>Probabilities</h3>
