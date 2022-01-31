@@ -6,9 +6,47 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { generateMap } from './envGen'
 import { Group } from 'three'
 
+// Settings
+
+const settings = {
+    mapSize: 40,
+    prob6x2: 0,
+    prob5x3: 0,
+    prob4x4: 0,
+    prob3x2: 0,
+    prob2x2: 0,
+    prob2x1: 0,
+    prob1x1A: 0,
+    prob1x1B: 0,
+    prob1x1C: 0,
+    fogColor: 0xf7dc9c,
+    light1Color: 0xffffff,
+    light2Color: 0xffffff,
+    carColor: 0xffffff,
+}
+
+// Menu 
+
+document.getElementById('generate-button').addEventListener('click', () => {
+    document.getElementById('main_menu').style.visibility = "hidden"
+    settings.mapSize = Number(document.getElementsByName('mapsize')[0].value)
+    settings.prob6x2 = Number(document.getElementsByName('sixtwo')[0].value)
+    settings.prob5x3 = Number(document.getElementsByName('fivethree')[0].value)
+    settings.prob4x4 = Number(document.getElementsByName('fourfour')[0].value)
+    settings.prob3x2 = Number(document.getElementsByName('threetwo')[0].value)
+    settings.prob2x2 = Number(document.getElementsByName('twotwo')[0].value)
+    settings.prob2x1 = Number(document.getElementsByName('twoone')[0].value)
+    settings.prob1x1A = Number(document.getElementsByName('oneoneA')[0].value)
+    settings.prob1x1B = Number(document.getElementsByName('oneoneB')[0].value)
+    settings.prob1x1C = Number(document.getElementsByName('oneoneC')[0].value)
+    console.log(settings)
+    runCreationScript(settings)
+})
+
+
 //Function
 
-function runCreationScript(objects) {
+function runCreationScript(settings) {
 
     // Canvas
 
@@ -33,7 +71,8 @@ function runCreationScript(objects) {
     // Scene & FOG
 
     const scene = new THREE.Scene()
-    const fogColor = new THREE.Color(0xf7dc9c)
+    // const fogColor = new THREE.Color(0xf7dc9c)
+    const fogColor = new THREE.Color(settings.fogColor)
 
     scene.background = fogColor
     scene.fog = new THREE.Fog(fogColor, 0.000025, 25)
@@ -60,14 +99,14 @@ function runCreationScript(objects) {
 
     // Lights
 
-    const pointLight1 = new THREE.PointLight(0xffffff, 0.4, 0)
+    const pointLight1 = new THREE.PointLight(settings.light1Color, 0.4, 0)
     scene.add(pointLight1)
     pointLight1.position.y = 10
     pointLight1.position.z = 50
     pointLight1.position.x = 50
 
     
-    const pointLight3 = new THREE.PointLight(0xffffff, 0.4, 0)
+    const pointLight3 = new THREE.PointLight(settings.light2Color, 0.4, 0)
     pointLight3.position.y = 10
     scene.add(pointLight3)
     
@@ -107,6 +146,8 @@ function runCreationScript(objects) {
         mesh.position.z = position[2]
         mesh.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
         scene.add( mesh );
+        const material1 = mesh.children[0].children.filter(element => element.name === "Cube016")[0].material
+        material1.roughness = 1
     }
 
     const createBuilding1x1B = (position) => {
@@ -117,6 +158,7 @@ function runCreationScript(objects) {
         const mesh1x1B = building1x1B_obj.scene.clone();
         mesh1x1B.position.x = position[0]
         mesh1x1B.position.z = position[2]
+        // mesh1x1B.position.y = -1.5
         mesh1x1B.rotation.y = Math.PI/180 * (Math.floor(Math.random() * 4) * 90)
         scene.add( mesh1x1B );
 
@@ -317,7 +359,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionX === element.positionX + 5 && square.positionZ === element.positionZ + 1).used
                                 ) 
                             {
-                                if (probability > 0) {
+                                if (probability > (10 - settings.prob6x2) / 10) {
                                     createBuilding6x2([element.positionX,1,element.positionZ])
                                     buildingSquaresArray.push([element.positionX, element.positionZ])
                                     buildingSquaresArray.push([element.positionX, element.positionZ + 1])
@@ -403,7 +445,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionZ === element.positionZ + 5 && square.positionX === element.positionX + 1).used
                                 ) 
                             {
-                                if (probability > 0) {
+                                if (probability > (10 - settings.prob6x2) / 10) {
                                     createBuilding2x6([element.positionX,1,element.positionZ])
                                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
                                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true
@@ -486,7 +528,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionX === element.positionX + 4 && square.positionZ === element.positionZ + 2).used 
                                 ) 
                             {
-                                if (probability > 0.5) {
+                                if (probability > (10 - settings.prob5x3) / 10) {
                                     createBuilding5x3([element.positionX,1,element.positionZ])
                                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true
@@ -575,7 +617,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionZ === element.positionZ + 4 && square.positionX === element.positionX + 2).used 
                                 ) 
                             {
-                                if (probability > 0.5) {
+                                if (probability > (10 - settings.prob5x3) / 10) {
                                     createBuilding3x5([element.positionX,1,element.positionZ])
                                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
                                     array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true
@@ -667,7 +709,7 @@ function runCreationScript(objects) {
                                !array.find(square => square.positionX === element.positionX + 3 && square.positionZ === element.positionZ + 3).used
                                 ) 
                             {
-                                if (probability > 0) {
+                                if (probability > (10 - settings.prob4x4) / 10) {
                                     createBuilding4x4([element.positionX,1,element.positionZ])
                                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                                     array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true
@@ -731,7 +773,7 @@ function runCreationScript(objects) {
                            !array.find(square => square.positionZ === element.positionZ + 2 && square.positionX === element.positionX + 1).used
                             ) 
                         {
-                            if (probability > 0.5) {
+                            if (probability > (10 - settings.prob3x2) / 10) {
                                 createBuilding2x3([element.positionX,1,element.positionZ])
                                 array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX).used = true
                                 array.find(square => square.positionZ === element.positionZ && square.positionX === element.positionX + 1).used = true 
@@ -775,7 +817,7 @@ function runCreationScript(objects) {
                            !array.find(square => square.positionX === element.positionX + 2 && square.positionZ === element.positionZ + 1).used
                             ) 
                         {
-                            if (probability > 0.5) {
+                            if (probability > (10 - settings.prob3x2) / 10) {
                                 createBuilding3x2([element.positionX,1,element.positionZ])
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ + 1).used = true 
@@ -812,7 +854,7 @@ function runCreationScript(objects) {
                             !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ + 1).used
                             ) 
                         {
-                            if (probability > 0.9) {
+                            if (probability > (10 - settings.prob2x2) / 10) {
                                 createBuilding2x2([element.positionX,1,element.positionZ])
                                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                                 array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
@@ -827,7 +869,7 @@ function runCreationScript(objects) {
                 }  
             }
 
-            // 2x1
+            // // 2x1
 
             if (element.terrainType === 'building' && !element.used) {
                 const probability = Math.random()
@@ -840,7 +882,7 @@ function runCreationScript(objects) {
                         !array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used
                         ) 
                     {
-                        if (probability > 0.8) {
+                        if (probability > (10 - settings.prob2x1) / 10) {
                             createBuilding2x1([element.positionX,1,element.positionZ])
                             array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                             array.find(square => square.positionX === element.positionX + 1 && square.positionZ === element.positionZ).used = true
@@ -855,13 +897,31 @@ function runCreationScript(objects) {
 
             if (element.terrainType === 'building' && !element.used) 
             {
-                const variant = Math.floor(Math.random() * 29.9)
-                // createBuilding1x1A([element.positionX,1,element.positionZ])
+                const variant = Math.floor(Math.random() * 30)
                 array.find(square => square.positionX === element.positionX && square.positionZ === element.positionZ).used = true
                 buildingSquaresArray.push([element.positionX,element.positionZ])
-                if (variant >= 22 && variant < 25) createBuilding1x1A([element.positionX,1,element.positionZ])
-                if (variant === 25) createBuilding1x1B([element.positionX,1,element.positionZ])
-                if (variant > 25) createBuilding1x1C([element.positionX,1,element.positionZ])
+
+                let proportionRatio = 30 / (settings.prob1x1A + settings.prob1x1B + settings.prob1x1C)
+                if (proportionRatio === Infinity) proportionRatio = 0
+                const lowerRangeValue = settings.prob1x1A * proportionRatio
+                const higherRangeValue = settings.prob1x1B * proportionRatio + lowerRangeValue
+
+                console.log((settings.prob1x1A + settings.prob1x1B + settings.prob1x1C))
+                if (variant >= 0 && variant < lowerRangeValue) {
+                    if (Math.random() > (10 - settings.prob1x1A) / 10) {
+                        createBuilding1x1A([element.positionX,1,element.positionZ])
+                    }
+                }
+                if (variant >= lowerRangeValue && variant < higherRangeValue) {
+                    if (Math.random() > (10 - settings.prob1x1B) / 10) {
+                        createBuilding1x1B([element.positionX,1,element.positionZ])
+                    }
+                }
+                if (variant >= higherRangeValue && variant <= 30) {
+                    if (Math.random() > (10 - settings.prob1x1C) / 10) {
+                        createBuilding1x1C([element.positionX,1,element.positionZ])
+                    }
+                }
             }
 
         })
@@ -869,11 +929,8 @@ function runCreationScript(objects) {
         // camera.position.set(sideElements / 2, sideElements * 1.5, -3)
     }
 
-    createMap(50);
+    createMap(settings.mapSize);
 
-    // console.log(buildingSquaresArray)
-
-    // console.log(scene)
     // Keyboard Controls 
 
     class InputHandler {
@@ -934,11 +991,11 @@ function runCreationScript(objects) {
     const playerWheelFrontR = player.children.filter(object => object.name === 'Front-R')[0]
     const playerWheelBackL = player.children.filter(object => object.name === 'Back-L')[0]
     const playerWheelBackR = player.children.filter(object => object.name === 'Back-R')[0]
+    const playerBody = player.children.filter(object => object.name === 'Body')[0]
+    const playerBodyMaterial = playerBody.children.filter(object => object.name === 'Cube008')[0].material
+    playerBodyMaterial.color.set(settings.carColor)
     player.position.y = 0.1
     scene.add(player)
-
-    // console.log(Object.keys(scene.children))
-    // console.log(scene.children[4])
 
     // Camera Player Group
 
@@ -971,8 +1028,6 @@ function runCreationScript(objects) {
         requestAnimationFrame( animate );
         const delta = clock.getDelta();
 
-        //
-        // console.log(pointLight2.position)
         // player movement
 
         if (wheelRotationRatio > 0) wheelRotationRatio -= 1
@@ -1071,18 +1126,7 @@ function runCreationScript(objects) {
                 thirdPersonCamera.position.z -= (0.01 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
                 currentSpeed = 0
             }
-            // if (
-            //     streetSquaresArray.some(streetElement => 
-            //         (
-            //             (streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) || streetElement[0] === (thirdPersonCamera.position.x + 0.5) - 1) && 
-            //             (streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5) || streetElement[1] === (thirdPersonCamera.position.z + 0.5) - 1)
-            //         ))
-            //     )
-            // {
-            //     thirdPersonCamera.position.x += (0.025 * Math.abs(currentSpeed)/100) * Math.sin(thirdPersonCamera.rotation.y)
-            //     thirdPersonCamera.position.z += (0.025 * Math.abs(currentSpeed)/100) * Math.cos(thirdPersonCamera.rotation.y)
-            // } 
-            // if (streetSquaresArray.some(streetElement => streetElement[0] === Math.floor(thirdPersonCamera.position.x + 0.5) && streetElement[1] === Math.floor(thirdPersonCamera.position.z + 0.5))) 
+
             if (currentSpeed > -100) currentSpeed -= 2
         } 
 
@@ -1100,16 +1144,6 @@ function runCreationScript(objects) {
                 }
             }
         }
-
-
-        // console.log(thirdPersonCamera.position.x, thirdPersonCamera.position.z)   
-        // console.log(!!buildingSquaresArray.find(buildingTerrain => 
-                
-        //         (buildingTerrain[0] - thirdPersonCamera.position.x) <= 0.5 && 
-        //         (buildingTerrain[0] - thirdPersonCamera.position.x) >= -0.5 &&
-        //         (buildingTerrain[1] - thirdPersonCamera.position.z) <= 0.5 && 
-        //         (buildingTerrain[1] - thirdPersonCamera.position.z) >= -0.5
-        //         ))
 
         if (!!currentSquareBuilding) 
         {
@@ -1206,25 +1240,15 @@ let building6x2A_obj;
 
 manager.onStart = function ( url, itemsLoaded, itemsTotal ) 
 { 
+    document.getElementById('loading_screen').style.visibility = "visible"
     console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' ); 
 }; 
 manager.onLoad = function ( ) 
 { 
+    document.getElementById('loading_screen').style.visibility = "hidden"
+    document.getElementById('main_menu').style.visibility = "visible"
     console.log( 'Loading complete!'); 
-    runCreationScript(
-        {
-            car,
-            building1x1A_obj,
-            building1x1B_obj,
-            building1x1C_obj,
-            building2x1A_obj,
-            building2x2A_obj,
-            building3x2A_obj,
-            building4x4A_obj,
-            building5x3A_obj,
-            building6x2A_obj,
-        }
-    );
+    // runCreationScript(settings);
 }; 
 manager.onProgress = function ( url, itemsLoaded, itemsTotal ) 
 { 

@@ -7,6 +7,75 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id='loading_screen'>
+        Loading screen
+    </div>
+    <div id='main_menu'>
+        <h1>Random level generator</h1>
+        <p>blablablabla</p>
+        <form id="settings-form">
+                <label>Map size</label>
+                <input type='range' name="mapsize" min='10' max='100' value='10' step='1' oninput="range_mapsize_disp.value = this.value"/><output id="range_mapsize_disp">10</output>
+            <h3>Probabilities</h3>
+                <label>6x2</label>
+                <input type='range' name="sixtwo" min='0' max='10' step='1' value='0' oninput="sixtwo_disp.value = this.value"/><output id="sixtwo_disp">0</output>
+                <br/>
+                <label>5x3</label>
+                <input type='range' name="fivethree" min='0' max='10' step='1' value='0' oninput="fivethree_disp.value = this.value"/><output id="fivethree_disp">0</output>
+                <br/>
+                <label>4x4</label>
+                <input type='range' name="fourfour" min='0' max='10' step='1' value='0' oninput="fourfour_disp.value = this.value"/><output id="fourfour_disp">0</output>
+                <br/>
+                <label>3x2</label>
+                <input type='range' name="threetwo" min='0' max='10' step='1' value='0' oninput="threetwo_disp.value = this.value"/><output id="threetwo_disp">0</output>
+                <br/>
+                <label>2x2</label>
+                <input type='range' name="twotwo" min='0' max='10' step='1' value='0' oninput="twotwo_disp.value = this.value"/><output id="twotwo_disp">0</output>
+                <br/>
+                <label>2x1</label>
+                <input type='range' name="twoone" min='0' max='10' step='1' value='0' oninput="twoone_disp.value = this.value"/><output id="twoone_disp">0</output>
+                <br/>
+                <label>1x1A</label>
+                <input type='range' name="oneoneA" min='0' max='10' step='1' value='0' oninput="oneoneA_disp.value = this.value"/><output id="oneoneA_disp">0</output>
+                <br/>
+                <label>1x1B</label>
+                <input type='range' name="oneoneB" min='0' max='10' step='1' value='0' oninput="oneoneB_disp.value = this.value"/><output id="oneoneB_disp">0</output>
+                <br/>
+                <label>1x1C</label>
+                <input type='range' name="oneoneC" min='0' max='10' step='1' value='0' oninput="oneoneC_disp.value = this.value"/><output id="oneoneC_disp">0</output>
+            <h3>Colors</h3>
+                <label>Fog Color</label>
+                <input type='range'/><span>30</span>
+                <br/>
+                <label>Light1 Color</label>
+                <input type='range'/><span>30</span>
+                <br/>
+                <label>Light2 Color</label>
+                <input type='range'/><span>30</span>
+                <br/>
+                <label>Car Color</label>
+                <input type='range'/><span>30</span>
+                <br/>
+        </form>
+        <button id='generate-button'>Generate</button>
+    </div>
     <canvas class="webgl"></canvas>
 </body>
 </html>
+
+<!-- const settings = {
+    mapSize: 40,
+    prob6x2: 0,
+    prob5x3: 0,
+    prob4x4: 0,
+    prob3x2: 0,
+    prob2x2: 0,
+    prob2x1: 0,
+    prob1x1A: 0,
+    prob1x1B: 0,
+    prob1x1C: 0,
+    fogColor: 0xf7dc9c,
+    light1Color: 0xffffff,
+    light2Color: 0xffffff,
+    carColor: 0xffffff,
+} -->
