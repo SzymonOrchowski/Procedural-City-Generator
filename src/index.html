@@ -6,48 +6,63 @@
     <title>Playable random city generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id='body'> 
     <div id='loading_screen'>
         Loading screen
     </div>
     <div id='main_menu'>
         <h1>Random level generator</h1>
+        <div id='made_by'>
+            Made by: <br/>
+            <a href="http://www.szymonorchowski.co.uk">Szymon Orchowski</a> & <a href="https://www.artstation.com/tymosulek/blog">Tymoteusz Sulek</a>
+        </div>
         <form id="settings-form">
-            <div>
+            <div id='mapsize-container'>
                 <label>Map size</label>
-                <input type='range' name="mapsize" min='10' max='100' value='10' step='1' oninput="range_mapsize_disp.value = this.value"/><output id="range_mapsize_disp">10</output>    
+                <input type='range' id="mapsize" name="mapsize" min='10' max='100' value='10' step='1' oninput="range_mapsize_disp.value = this.value; range_mapsize_disp2.value = this.value"/>
+                <output id="range_mapsize_disp">10</output><span>x</span><output style="margin-left: 0px;" id="range_mapsize_disp2">10</output>    
             </div>
-            <div>
+            <div id='probabilities-container'>
                 <h3>Probabilities</h3>
-                    <label>6x2</label>
-                    <input type='range' name="sixtwo" min='0' max='10' step='1' value='0' oninput="sixtwo_disp.value = this.value"/><output id="sixtwo_disp">0</output>
+                    <label class='buildingType'>Barracks</label>
+                    <span>6x2</span>
+                    <input type='range' id="sixtwo" name="sixtwo" min='0' max='10' step='1' value='0' oninput="sixtwo_disp.value = this.value"/><output id="sixtwo_disp">0</output>
                     <br/>
-                    <label>5x3</label>
-                    <input type='range' name="fivethree" min='0' max='10' step='1' value='0' oninput="fivethree_disp.value = this.value"/><output id="fivethree_disp">0</output>
+                    <label class='buildingType'>Swingarm</label>
+                    <span>5x3</span>
+                    <input type='range' id="fivethree" name="fivethree" min='0' max='10' step='1' value='0' oninput="fivethree_disp.value = this.value"/><output id="fivethree_disp">0</output>
                     <br/>
-                    <label>4x4</label>
-                    <input type='range' name="fourfour" min='0' max='10' step='1' value='0' oninput="fourfour_disp.value = this.value"/><output id="fourfour_disp">0</output>
+                    <label class='buildingType'>Silo</label>
+                    <span>4x4</span>
+                    <input type='range' id="fourfour" name="fourfour" min='0' max='10' step='1' value='0' oninput="fourfour_disp.value = this.value"/><output id="fourfour_disp">0</output>
                     <br/>
-                    <label>3x2</label>
-                    <input type='range' name="threetwo" min='0' max='10' step='1' value='0' oninput="threetwo_disp.value = this.value"/><output id="threetwo_disp">0</output>
+                    <label class='buildingType'>Hut</label>
+                    <span>3x2</span>
+                    <input type='range' id="threetwo" name="threetwo" min='0' max='10' step='1' value='0' oninput="threetwo_disp.value = this.value"/><output id="threetwo_disp">0</output>
                     <br/>
-                    <label>2x2</label>
-                    <input type='range' name="twotwo" min='0' max='10' step='1' value='0' oninput="twotwo_disp.value = this.value"/><output id="twotwo_disp">0</output>
+                    <label class='buildingType'>Tower</label>
+                    <span>2x2</span>
+                    <input type='range' id="twotwo" name="twotwo" min='0' max='10' step='1' value='0' oninput="twotwo_disp.value = this.value"/><output id="twotwo_disp">0</output>
                     <br/>
-                    <label>2x1</label>
-                    <input type='range' name="twoone" min='0' max='10' step='1' value='0' oninput="twoone_disp.value = this.value"/><output id="twoone_disp">0</output>
+                    <label class='buildingType'>Radiator</label>
+                    <span>2x1</span>
+                    <input type='range' id="twoone" name="twoone" min='0' max='10' step='1' value='0' oninput="twoone_disp.value = this.value"/><output id="twoone_disp">0</output>
                     <br/>
-                    <label>1x1A</label>
-                    <input type='range' name="oneoneA" min='0' max='10' step='1' value='0' oninput="oneoneA_disp.value = this.value"/><output id="oneoneA_disp">0</output>
+                    <label class='buildingType'>Boxes</label>
+                    <span>1x1</span>
+                    <input type='range' id="oneoneA" name="oneoneA" min='0' max='10' step='1' value='0' oninput="oneoneA_disp.value = this.value"/><output id="oneoneA_disp">0</output>
                     <br/>
-                    <label>1x1B</label>
-                    <input type='range' name="oneoneB" min='0' max='10' step='1' value='0' oninput="oneoneB_disp.value = this.value"/><output id="oneoneB_disp">0</output>
+                    <label class='buildingType'>Lift</label>
+                    <span>1x1</span>
+                    <input type='range' id="oneoneB" name="oneoneB" min='0' max='10' step='1' value='0' oninput="oneoneB_disp.value = this.value"/><output id="oneoneB_disp">0</output>
                     <br/>
-                    <label>1x1C</label>
-                    <input type='range' name="oneoneC" min='0' max='10' step='1' value='0' oninput="oneoneC_disp.value = this.value"/><output id="oneoneC_disp">0</output>
+                    <label class='buildingType'>Crane</label>
+                    <span>1x1</span>
+                    <input type='range' id="oneoneC" name="oneoneC" min='0' max='10' step='1' value='0' oninput="oneoneC_disp.value = this.value"/><output id="oneoneC_disp">0</output>
+                    <br/>
                     <br/>
             </div>
-            <div>
+            <div id='colors-container'>
                 <h3>Colors</h3>
                     <div id='colors'>
                         <input type='color' name='fog-color' value='#f7dc9c'/>
@@ -66,10 +81,11 @@
                         <label>Car</label>
                         <button id="default_car_color_button">Default</button>
                         <br/>
+                        <br/>
                     </div>
             </div>
         </form>
-        <button id='generate-button'>Generate</button>
+        <button id='generate-button'>Generate!</button>
     </div>
     <div id='back-to-menu-button' onclick='window.location.reload();'>Back to Menu</div>
     <canvas class="webgl"></canvas>

@@ -1262,6 +1262,17 @@ let building6x2A_obj;
 manager.onStart = function ( url, itemsLoaded, itemsTotal ) 
 { 
     document.getElementById('loading_screen').style.display = "block"
+    document.getElementById('range_mapsize_disp').value = document.getElementById('mapsize').value
+    document.getElementById('range_mapsize_disp2').value = document.getElementById('mapsize').value
+    document.getElementById('sixtwo_disp').value = document.getElementById('sixtwo').value
+    document.getElementById('fivethree_disp').value = document.getElementById('fivethree').value
+    document.getElementById('fourfour_disp').value = document.getElementById('fourfour').value
+    document.getElementById('threetwo_disp').value = document.getElementById('threetwo').value
+    document.getElementById('twotwo_disp').value = document.getElementById('twotwo').value
+    document.getElementById('twoone_disp').value = document.getElementById('twoone').value
+    document.getElementById('oneoneA_disp').value = document.getElementById('oneoneA').value
+    document.getElementById('oneoneB_disp').value = document.getElementById('oneoneB').value
+    document.getElementById('oneoneC_disp').value = document.getElementById('oneoneC').value
     console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' ); 
 }; 
 manager.onLoad = function ( ) 
