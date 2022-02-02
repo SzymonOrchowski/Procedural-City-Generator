@@ -300,6 +300,7 @@ function runCreationScript(settings) {
 
     const controls = new OrbitControls( camera, renderer.domElement );
     controls.enableZoom = false;
+    controls.enabled = false;
 
     // Scenery Objects
 
