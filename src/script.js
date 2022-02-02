@@ -1225,10 +1225,10 @@ function runCreationScript(settings) {
             if (wheelRotationRatio > -10) wheelRotationRatio -= 2
             if (currentSpeed > 0) {
                 if (cameraOffAxisRatio < 50) cameraOffAxisRatio += 2
-                thirdPersonCamera.rotation.y += 0.04
+                thirdPersonCamera.rotation.y += 0.04 * -wheelRotationRatio/10
             } 
             if (currentSpeed < 0) {
-                thirdPersonCamera.rotation.y -= 0.04
+                thirdPersonCamera.rotation.y -= 0.04 * -wheelRotationRatio/10
             } 
            
             playerWheelFrontL.rotation.y = Math.PI / 180 * (30 * wheelRotationRatio/10) 
@@ -1257,10 +1257,10 @@ function runCreationScript(settings) {
             if (wheelRotationRatio < 10) wheelRotationRatio += 2
             if (currentSpeed > 0) {
                 if (cameraOffAxisRatio > -50) cameraOffAxisRatio -= 2
-                thirdPersonCamera.rotation.y -= 0.04
+                thirdPersonCamera.rotation.y -= 0.04 * wheelRotationRatio/10
             }
             if (currentSpeed < 0) {
-                thirdPersonCamera.rotation.y += 0.04
+                thirdPersonCamera.rotation.y += 0.04 * wheelRotationRatio/10
             }
             playerWheelFrontL.rotation.y = Math.PI / 180 * (30 * (wheelRotationRatio/10)) 
             playerWheelFrontR.rotation.y = -Math.PI / 180 * (30 * (wheelRotationRatio/10)) 

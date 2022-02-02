@@ -266,3 +266,23 @@ input[type=range]::-ms-fill-upper {
 input[type=range]:focus::-ms-fill-upper {
     background: #6d6d6d;
 }
+
+#check-repo {
+    border: #000000 1px solid;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255, 0.8);
+    width: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#check-repo img {
+    opacity: 0.5
+}
+
+#check-repo img:hover {
+    opacity: 0.9
+}
