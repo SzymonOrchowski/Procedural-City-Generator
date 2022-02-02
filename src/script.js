@@ -162,6 +162,8 @@ const presets = [
 
 // Menu 
 
+let animationRunning = true;
+
 document.getElementById('default_fog_color_button').addEventListener('click', (e) => {
     e.preventDefault()
     document.getElementsByName('fog-color')[0].value = '#f7dc9c'
