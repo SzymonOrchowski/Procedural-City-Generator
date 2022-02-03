@@ -214,10 +214,7 @@ document.getElementById('generate-button').addEventListener('click', () => {
     settings.light2Color = document.getElementsByName('light2-color')[0].value
     settings.carColor = document.getElementsByName('car-color')[0].value
     document.getElementById('back-to-menu-button').style.display = 'block'
-    console.log('Fog -> ', settings.fogColor)
-    console.log('Light1 -> ', settings.light1Color)
-    console.log('Light1 -> ', settings.light2Color)
-    console.log('Car -> ', settings.carColor)
+    document.getElementById('mobile-controler-container').style.display = 'block'
     runCreationScript(settings)
 })
 
