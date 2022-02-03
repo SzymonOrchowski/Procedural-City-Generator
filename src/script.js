@@ -1158,6 +1158,68 @@ function runCreationScript(settings) {
                     this.keys.splice(this.keys.indexOf(e.key), 1)
                     }
             })
+
+            // mobile controls
+            document.getElementById('LF').addEventListener('touchstart', () => {
+                this.keys.push("w")
+                this.keys.push("a")
+            })
+            document.getElementById('LF').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("w"), 1)
+                this.keys.splice(this.keys.indexOf("a"), 1)
+            })
+            document.getElementById('F').addEventListener('touchstart', () => {
+                this.keys.push("w")
+            })
+            document.getElementById('F').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("w"), 1)
+            })
+            document.getElementById('RF').addEventListener('touchstart', () => {
+                this.keys.push("w")
+                this.keys.push("d")
+            })
+            document.getElementById('RF').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("w"), 1)
+                this.keys.splice(this.keys.indexOf("d"), 1)
+            })
+
+
+            document.getElementById('L').addEventListener('touchstart', () => {
+                this.keys.push("a")
+            })
+            document.getElementById('L').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("a"), 1)
+            })
+            document.getElementById('R').addEventListener('touchstart', () => {
+                this.keys.push("d")
+            })
+            document.getElementById('R').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("d"), 1)
+            })
+
+
+            document.getElementById('LB').addEventListener('touchstart', () => {
+                this.keys.push("s")
+                this.keys.push("a")
+            })
+            document.getElementById('LB').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("s"), 1)
+                this.keys.splice(this.keys.indexOf("a"), 1)
+            })
+            document.getElementById('B').addEventListener('touchstart', () => {
+                this.keys.push("s")
+            })
+            document.getElementById('B').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("s"), 1)
+            })
+            document.getElementById('LB').addEventListener('touchstart', () => {
+                this.keys.push("s")
+                this.keys.push("d")
+            })
+            document.getElementById('LB').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("s"), 1)
+                this.keys.splice(this.keys.indexOf("d"), 1)
+            })
         }
     }
 
