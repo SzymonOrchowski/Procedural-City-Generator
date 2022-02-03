@@ -314,6 +314,13 @@ input[type=range]:focus::-ms-fill-upper {
   }
 
 #mobile-controler-container {
+    touch-action: manipulation;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
     display: none;
     position: absolute;
     /* border: red 1px solid; */
@@ -331,11 +338,17 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .mobile-controler-row div {
     touch-action: manipulation;
-
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
     width: 33%
 }
 .mobile-controler-row img {
     opacity: 0.7;
+    touch-action: manipulation;
     -webkit-touch-callout:none;
     -webkit-user-select:none;
     -khtml-user-select:none;
@@ -347,6 +360,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .mobile-controler-row img:hover {
     opacity: 0.9;
+    touch-action: manipulation;
     -webkit-touch-callout:none;
     -webkit-user-select:none;
     -khtml-user-select:none;
