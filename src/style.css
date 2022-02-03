@@ -4,6 +4,7 @@ body {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     text-align: center;
+    touch-action: manipulation;
 }
 
 #loading_screen {
@@ -302,11 +303,12 @@ input[type=range]:focus::-ms-fill-upper {
     display: block;
     position: absolute;
     /* border: red 1px solid; */
+    touch-action: manipulation;
     background-color: rgb(0,0,0,0.8);
     width: 80%;
     height: 210px;
     left: 10%;
-    top: calc(100% - 240px)
+    top: calc(100% - 230px)
 }
 
 .mobile-controler-row {
@@ -316,5 +318,10 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .mobile-controler-row div {
     border: red 1px solid;
+    width: 33%
+}
+.mobile-controler-row div:hover {
+    border: red 1px solid;
+    background-color: rgba(245, 23, 23, 0.8);
     width: 33%
 }

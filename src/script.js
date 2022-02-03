@@ -162,8 +162,6 @@ const presets = [
 
 // Menu 
 
-let animationRunning = true;
-
 document.getElementById('default_fog_color_button').addEventListener('click', (e) => {
     e.preventDefault()
     document.getElementsByName('fog-color')[0].value = '#f7dc9c'
@@ -199,6 +197,7 @@ document.getElementById('preset_select').addEventListener('change', (e) => {
 })
 
 document.getElementById('generate-button').addEventListener('click', () => {
+    window.scrollTo(0, 0)
     document.getElementById('main_menu').style.display = 'none'
     settings.mapSize = Number(document.getElementsByName('mapsize')[0].value)
     settings.prob6x2 = Number(document.getElementsByName('sixtwo')[0].value)
@@ -1168,10 +1167,17 @@ function runCreationScript(settings) {
                 this.keys.splice(this.keys.indexOf("w"), 1)
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
+            document.getElementById('LF').addEventListener('touchmove', () => {
+                this.keys.splice(this.keys.indexOf("w"), 1)
+                this.keys.splice(this.keys.indexOf("a"), 1)
+            })
             document.getElementById('F').addEventListener('touchstart', () => {
                 this.keys.push("w")
             })
             document.getElementById('F').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("w"), 1)
+            })
+            document.getElementById('F').addEventListener('touchmove', () => {
                 this.keys.splice(this.keys.indexOf("w"), 1)
             })
             document.getElementById('RF').addEventListener('touchstart', () => {
@@ -1190,10 +1196,16 @@ function runCreationScript(settings) {
             document.getElementById('L').addEventListener('touchend', () => {
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
+            document.getElementById('L').addEventListener('touchmove', () => {
+                this.keys.splice(this.keys.indexOf("a"), 1)
+            })
             document.getElementById('R').addEventListener('touchstart', () => {
                 this.keys.push("d")
             })
             document.getElementById('R').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("d"), 1)
+            })
+            document.getElementById('R').addEventListener('touchmove', () => {
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
 
@@ -1206,10 +1218,17 @@ function runCreationScript(settings) {
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
+            document.getElementById('LB').addEventListener('touchmove', () => {
+                this.keys.splice(this.keys.indexOf("s"), 1)
+                this.keys.splice(this.keys.indexOf("a"), 1)
+            })
             document.getElementById('B').addEventListener('touchstart', () => {
                 this.keys.push("s")
             })
             document.getElementById('B').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("s"), 1)
+            })
+            document.getElementById('B').addEventListener('touchmove', () => {
                 this.keys.splice(this.keys.indexOf("s"), 1)
             })
             document.getElementById('LB').addEventListener('touchstart', () => {
@@ -1217,6 +1236,10 @@ function runCreationScript(settings) {
                 this.keys.push("d")
             })
             document.getElementById('LB').addEventListener('touchend', () => {
+                this.keys.splice(this.keys.indexOf("s"), 1)
+                this.keys.splice(this.keys.indexOf("d"), 1)
+            })
+            document.getElementById('LB').addEventListener('touchmove', () => {
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
