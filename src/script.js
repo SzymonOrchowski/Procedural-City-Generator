@@ -1156,87 +1156,109 @@ function runCreationScript(settings) {
             })
 
             // mobile controls
-            document.getElementById('LF').addEventListener('touchstart', () => {
+            document.getElementById('LF').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("w")
                 this.keys.push("a")
             })
-            document.getElementById('LF').addEventListener('touchend', () => {
+            document.getElementById('LF').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("w"), 1)
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
-            document.getElementById('LF').addEventListener('touchmove', () => {
+            document.getElementById('LF').addEventListener('touchmove', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("w"), 1)
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
-            document.getElementById('F').addEventListener('touchstart', () => {
+            document.getElementById('F').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("w")
             })
-            document.getElementById('F').addEventListener('touchend', () => {
+            document.getElementById('F').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("w"), 1)
             })
-            document.getElementById('F').addEventListener('touchmove', () => {
-                this.keys.splice(this.keys.indexOf("w"), 1)
-            })
-            document.getElementById('RF').addEventListener('touchstart', () => {
+            // document.getElementById('F').addEventListener('touchmove', () => {
+            //     this.keys.splice(this.keys.indexOf("w"), 1)
+            // })
+            document.getElementById('RF').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("w")
                 this.keys.push("d")
             })
-            document.getElementById('RF').addEventListener('touchend', () => {
+            document.getElementById('RF').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("w"), 1)
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
 
 
-            document.getElementById('L').addEventListener('touchstart', () => {
+            document.getElementById('L').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("a")
             })
-            document.getElementById('L').addEventListener('touchend', () => {
+            document.getElementById('L').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
-            document.getElementById('L').addEventListener('touchmove', () => {
+            document.getElementById('L').addEventListener('touchmove', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
-            document.getElementById('R').addEventListener('touchstart', () => {
+            document.getElementById('R').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("d")
             })
-            document.getElementById('R').addEventListener('touchend', () => {
+            document.getElementById('R').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
-            document.getElementById('R').addEventListener('touchmove', () => {
+            document.getElementById('R').addEventListener('touchmove', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
 
 
-            document.getElementById('LB').addEventListener('touchstart', () => {
+            document.getElementById('LB').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("s")
                 this.keys.push("a")
             })
-            document.getElementById('LB').addEventListener('touchend', () => {
+            document.getElementById('LB').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
-            document.getElementById('LB').addEventListener('touchmove', () => {
+            document.getElementById('LB').addEventListener('touchmove', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("a"), 1)
             })
-            document.getElementById('B').addEventListener('touchstart', () => {
+            document.getElementById('B').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("s")
             })
-            document.getElementById('B').addEventListener('touchend', () => {
+            document.getElementById('B').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
             })
-            document.getElementById('B').addEventListener('touchmove', () => {
+            document.getElementById('B').addEventListener('touchmove', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
             })
-            document.getElementById('LB').addEventListener('touchstart', () => {
+            document.getElementById('LB').addEventListener('touchstart', (e) => {
+                e.preventDefault();
                 this.keys.push("s")
                 this.keys.push("d")
             })
-            document.getElementById('LB').addEventListener('touchend', () => {
+            document.getElementById('LB').addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
-            document.getElementById('LB').addEventListener('touchmove', () => {
+            document.getElementById('LB').addEventListener('touchmove', (e) => {
+                e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
