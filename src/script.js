@@ -1243,10 +1243,10 @@ function runCreationScript(settings) {
                 e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
             })
-            document.getElementById('B').addEventListener('touchmove', (e) => {
-                e.preventDefault();
-                this.keys.splice(this.keys.indexOf("s"), 1)
-            })
+            // document.getElementById('B').addEventListener('touchmove', (e) => {
+            //     e.preventDefault();
+            //     this.keys.splice(this.keys.indexOf("s"), 1)
+            // })
             document.getElementById('RB').addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.keys.push("s")
