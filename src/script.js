@@ -1247,17 +1247,17 @@ function runCreationScript(settings) {
                 e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
             })
-            document.getElementById('LB').addEventListener('touchstart', (e) => {
+            document.getElementById('RB').addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.keys.push("s")
                 this.keys.push("d")
             })
-            document.getElementById('LB').addEventListener('touchend', (e) => {
+            document.getElementById('RB').addEventListener('touchend', (e) => {
                 e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("d"), 1)
             })
-            document.getElementById('LB').addEventListener('touchmove', (e) => {
+            document.getElementById('RB').addEventListener('touchmove', (e) => {
                 e.preventDefault();
                 this.keys.splice(this.keys.indexOf("s"), 1)
                 this.keys.splice(this.keys.indexOf("d"), 1)
